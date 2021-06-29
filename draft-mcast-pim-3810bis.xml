@@ -75,7 +75,7 @@
    <xref target="RFC2119" />.</t>
    </section>
 
-   <section title="2.  Protocol Overview">
+   <section title="Protocol Overview">
 
    <t>This section gives a brief description of the protocol operation. The
    following sections present the protocol details.</t>
@@ -94,39 +94,39 @@
    attached link is listening to packets for a particular multicast
    address, from a particular source; a multicast router is not required
    to individually keep track of the interests of each neighboring
-	   node.  (Nevertheless, see Appendix <xref target="host_suppress" /> item 1 for discussion.)</t>
+	   node.  (Nevertheless, see <xref target="host_suppress" /> item 1 for discussion.)</t>
 
    <t>A multicast router performs the router part of the MLDv2 protocol
-	   (described in details in Section <xref target="mr_proto" />) on each of its directly attached
+	   (described in details in <xref target="mr_proto" />) on each of its directly attached
    links.  If a multicast router has more than one interface connected
    to the same link, it only needs to operate the protocol on one of
    those interfaces.  The router behavior depends on whether there are
    several multicast routers on the same subnet, or not.  If that is the
-		   case, a querier election mechanism (described in Section <xref target="elect" />) is
+		   case, a querier election mechanism (described in <xref target="elect" />) is
    used to elect a single multicast router to be in Querier state.  This
    router is called the Querier.  All multicast routers on the subnet
    listen to the messages sent by multicast address listeners, and
    maintain the same multicast listening information state, so that they
    can take over the querier role, should the present Querier fail.
    Nevertheless, only the Querier sends periodical or triggered query
-		   messages on the subnet, as described in Section <xref target="mld_qrys" />.</t>
+		   messages on the subnet, as described in <xref target="mld_qrys" />.</t>
 
    <t>A multicast address listener performs the listener part of the
-	   MLDv2 protocol (described in details in Section <xref target="proto" />) on all interfaces
+	   MLDv2 protocol (described in details in <xref target="proto" />) on all interfaces
    on which multicast reception is supported, even if more than one of
    those interfaces are connected to the same link.</t>
 
-   <section title="2.1.  Building Multicast Listening State on Multicast Address Listeners" anchor="build_state">
+   <section title="Building Multicast Listening State on Multicast Address Listeners" anchor="build_state">
 
    <t>Upper-layer protocols and applications that run on a multicast
    address listener node use specific service interface calls (described
-   in Section <xref target="srvc_if" />) to ask the IP layer to enable or disable reception of
+   in <xref target="srvc_if" />) to ask the IP layer to enable or disable reception of
    packets sent to specific multicast addresses.  The node keeps
    Multicast Address Listening state for each socket on which the
-   service interface calls have been invoked (Section <xref target="sock_state" />).  In addition
+   service interface calls have been invoked (<xref target="sock_state" />).  In addition
    to this per-socket multicast listening state, a node must also
    maintain or compute multicast listening state for each of its
-   interfaces (Section <xref target="if_state" />).  Conceptually, that state consists of a set
+   interfaces (<xref target="if_state" />).  Conceptually, that state consists of a set
    of records, with each record containing an IPv6 multicast address, a
    filter mode, and a source list.  The filter mode may be either
    INCLUDE or EXCLUDE.  In INCLUDE mode, reception of packets sent to
@@ -148,7 +148,7 @@
    processed by hosts and routers.</t>
    </section>
 
-   <section title="2.2.  Exchanging Messages between the Querier and the Listening Nodes" anchor="msg_ex">
+   <section title="Exchanging Messages between the Querier and the Listening Nodes" anchor="msg_ex">
 
    <t>There are three types of MLDv2 query messages: General Queries,
    Multicast Address Specific Queries, and Multicast Address and Source
@@ -165,7 +165,7 @@
    State Change Report message.  The State Change Report contains either
    Filter Mode Change records, Source List Change records, or records of
    both types.  A detailed description of the report messages is
-	   presented in Section <xref target="mar_types" />.</t>
+	   presented in <xref target="mar_types" />.</t>
 
    <t>Both router and listener state changes are mainly triggered by the
    expiration of a specific timer, or the reception of an MLD message
@@ -191,12 +191,12 @@
    link is expected to be lossy (e.g., a wireless connection), the value
    of the Robustness Variable may be increased.  MLD is robust to
    [Robustness Variable]-1 packet losses.  This document recommends a
-	   default value of 2 for the Robustness Variable (see Section <xref target="robust" />).</t>
+	   default value of 2 for the Robustness Variable (see <xref target="robust" />).</t>
 
    <t>If more changes to the same per-interface state entry occur before
    all the retransmissions of the State Change Report for the first
    change have been completed, each additional change triggers the
-	   immediate transmission of a new State Change Report.  Section <xref target="chg_if_state" />
+	   immediate transmission of a new State Change Report.  <xref target="chg_if_state" />
    shows how the content of this new report is computed. Retransmissions
    of the new State Change Report will be scheduled as well, in order to
    ensure that each instance of state change is transmitted at least
@@ -212,7 +212,7 @@
    specified multicast address or not.  Similarly, the Querier sends a
    Multicast Address and Source Specific Query to verify whether, for a
    specified multicast address, there are nodes still listening to a
-	   specific set of sources, or not.  Section <xref target="qry_vars" /> describes each query
+	   specific set of sources, or not.  <xref target="qry_vars" /> describes each query
 	   in more detail.</t>
 
    <t>Both Multicast Address Specific Queries and Multicast Address and
@@ -222,12 +222,12 @@
    router treating all Multicast Listener Reports as potential changes
    in state.  By doing so, the fast leave mechanism of MLDv2, described
 	   <!-- The following cross-reference appears to be to the wrong section -->
-   in more detail in Section <xref target="msg_ex" />, might not be effective if a State
+   in more detail in <xref target="msg_ex" />, might not be effective if a State
    Change Report is lost, and only the following Current State Report is
    received by the router.  Nevertheless, it avoids an increased
    processing at the router and it reduces the MLD traffic on the link.
    More details on the necessity of distinguishing between the two
-	   report types can be found in Appendix <xref target="state_change" />.</t>
+	   report types can be found in <xref target="state_change" />.</t>
 
    <t>Nodes respond to the above queries through Current State Reports,
    that contain their per-interface Multicast Address Listening state
@@ -242,7 +242,7 @@
    queries have to be merged.  In addition, host reports received for a
    multicast address with pending queries may affect the contents of
    those queries.  The process of building and maintaining the state of
-	   pending queries is presented in Section <xref target="spec_qry" />.</t>
+	   pending queries is presented in <xref target="spec_qry" />.</t>
 
    <t>Protocol robustness is also enhanced through the use of the S flag
    (Suppress Router-Side Processing).  As described above, when a
@@ -262,7 +262,7 @@
 	   subsequent queries the Querier sets the S flag.</t>
    </section>
 
-   <section title="2.3.  Building Multicast Address Listener State on Multicast Routers">
+   <section title="Building Multicast Address Listener State on Multicast Routers">
 
    <t>Multicast routers that implement MLDv2 (whether they are in Querier
    state or not) keep state per multicast address per attached link.
@@ -349,7 +349,7 @@
       eliminated source(s), and rebuild the Requested List accordingly.
       The protocol ensures that when a switch to INCLUDE mode occurs,
       the Requested List will be accurate.  Details about the transition
-	      of the router to INCLUDE mode are presented in Appendix <xref target="mode_switch" />.</t>
+	      of the router to INCLUDE mode are presented in <xref target="mode_switch" />.</t>
 
    <t>To allow the fast blocking of previously unblocked sources.  If
       the router receives a report that contains such a request, the
@@ -368,11 +368,11 @@
 
    <t>Both the MLDv2 router and listener behaviors described in this
    document were defined to ensure backward interoperability with MLDv1
-	   hosts and routers.  Interoperability issues are detailed in Section <xref target="interop" />.</t>
+	   hosts and routers.  Interoperability issues are detailed in <xref target="interop" />.</t>
    </section>
    </section>
 
-   <section title="3.  The Service Interface for Requesting IP Multicast Reception" anchor="srvc_if">
+   <section title="The Service Interface for Requesting IP Multicast Reception" anchor="srvc_if">
 
    <t>Within an IP system, there is (at least conceptually) a service
    interface used by upper-layer protocols or application programs to
@@ -466,8 +466,8 @@
 	   service interface is given in <xref target="RFC3678" />.</t>
    </section>
 
-   <section title="4.  Multicast Listening State Maintained by Nodes" anchor="node_state">
-   <section title="4.1.  Per-Socket State" anchor="sock_state">
+   <section title="Multicast Listening State Maintained by Nodes" anchor="node_state">
+   <section title="Per-Socket State" anchor="sock_state">
 
    <t>For each socket on which IPv6MulticastListen has been invoked, the
    node records the desired multicast listening state for that socket.
@@ -497,7 +497,7 @@
    </list></t>
    </section>
 
-   <section title="4.2.  Per-Interface State" anchor="if_state">
+   <section title="Per-Interface State" anchor="if_state">
 
    <t>In addition to the per-socket multicast listening state, a node must
    also maintain or compute multicast listening state for each of its
@@ -633,7 +633,7 @@
    </section>
    </section>
 
-   <section title="5.  Message Formats">
+   <section title="Message Formats">
 
    <t>MLDv2 is a sub-protocol of ICMPv6, that is, MLDv2 message types are a
    subset of ICMPv6 messages, and MLDv2 messages are identified in IPv6
@@ -646,7 +646,7 @@
    interest.)  MLDv2 Reports can be sent with the source address set to
 	   the unspecified address <xref target="RFC3513" />, if a valid link-local IPv6 source
    address has not been acquired yet for the sending interface.  (See
-	   Section <xref target="src_addrs" />. for details.)</t>
+	   <xref target="src_addrs" />. for details.)</t>
 
    <t>There are two MLD message types of concern to the MLDv2 protocol
    described in this document:
@@ -655,11 +655,11 @@
    <t>Multicast Listener Query (Type = decimal 130)</t>
 
    <t>Version 2 Multicast Listener Report (Type = decimal 143).  See
-	   Section <xref target="iana" /> for IANA considerations.</t>
+	   <xref target="iana" /> for IANA considerations.</t>
    </list></t>
 
    <t>To assure the interoperability with nodes that implement MLDv1 (see
-   Section <xref target="interop" />), an implementation of MLDv2 must also support the
+   <xref target="interop" />), an implementation of MLDv2 must also support the
    following two message types:
    <list style="bullets">
 
@@ -676,7 +676,7 @@
    "Query" and "Report" refer to MLD Multicast Listener Queries and MLD
 	   Version 2 Multicast Listener Reports, respectively.</t>
 
-   <section title="5.1.  Multicast Listener Query Message" anchor="qry_msg">
+   <section title="Multicast Listener Query Message" anchor="qry_msg">
 
    <t>Multicast Listener Queries are sent by multicast routers in Querier
    State to query the multicast listening state of neighboring
@@ -731,12 +731,12 @@
       ]]></artwork>
    </figure>
 
-   <section title="5.1.1.  Code">
+   <section title="Code">
 
 	   <t>Initialized to zero by the sender; ignored by receivers.</t>
 
    </section>
-   <section title="5.1.2.  Checksum">
+   <section title="Checksum">
 
    <t>The standard ICMPv6 checksum; it covers the entire MLDv2 message,
 	   plus a "pseudo-header" of IPv6 header fields <xref target="RFC2463" />.  For
@@ -745,7 +745,7 @@
 	   it.</t>
    </section>
 
-   <section title="5.1.3.  Maximum Response Code" anchor="mrcode">
+   <section title="Maximum Response Code" anchor="mrcode">
 
    <t>The Maximum Response Code field specifies the maximum time allowed
    before sending a responding Report.  The actual time allowed, called
@@ -776,20 +776,20 @@
 	   allow the tuning of the burstiness of MLD traffic on a link.</t>
    </section>
 
-   <section title="5.1.4.  Reserved">
+   <section title="Reserved">
 
 	   <t>Initialized to zero by the sender; ignored by receivers.</t>
    </section>
 
-   <section title="5.1.5.  Multicast Address">
+   <section title="Multicast Address">
 
    <t>For a General Query, the Multicast Address field is set to zero.  For
    a Multicast Address Specific Query or Multicast Address and Source
    Specific Query, it is set to the multicast address being queried (see
-	   Section <xref target="num_srcs" />, below).</t>
+	   <xref target="num_srcs" />, below).</t>
    </section>
 
-   <section title="5.1.7.  S Flag (Suppress Router-Side Processing)">
+   <section title="S Flag (Suppress Router-Side Processing)">
 
    <t>When set to one, the S Flag indicates to any receiving multicast
    routers that they have to suppress the normal timer updates they
@@ -799,7 +799,7 @@
 	   a multicast listener.</t>
    </section>
 
-   <section title="5.1.8.  QRV (Querier's Robustness Variable)">
+   <section title="QRV (Querier's Robustness Variable)">
 
    <t>If non-zero, the QRV field contains the [Robustness Variable] value
    used by the Querier.  If the Querier's [Robustness Variable] exceeds
@@ -808,11 +808,11 @@
    <t>Routers adopt the QRV value from the most recently received Query as
    their own [Robustness Variable] value, unless that most recently
    received QRV was zero, in which case they use the default [Robustness
-	   Variable] value specified in Section <xref target="robust" />, or a statically configured
+	   Variable] value specified in <xref target="robust" />, or a statically configured
 	   value.</t>
    </section>
 
-   <section title="5.1.9.  QQIC (Querier's Query Interval Code)">
+   <section title="QQIC (Querier's Query Interval Code)">
 
    <t>The Querier's Query Interval Code field specifies the [Query
    Interval] used by the Querier.  The actual interval, called the
@@ -838,10 +838,10 @@
    value from the most recently received Query as their own [Query
    Interval] value, unless that most recently received QQI was zero, in
    which case the receiving routers use the default [Query Interval]
-	   value specified in Section <xref target="qry_int" />.</t>
+	   value specified in <xref target="qry_int" />.</t>
    </section>
 
-   <section title="5.1.10.  Number of Sources (N)" anchor="num_srcs">
+   <section title="Number of Sources (N)" anchor="num_srcs">
 
    <t>The Number of Sources (N) field specifies how many source addresses
    are present in the Query.  This number is zero in a General Query or
@@ -856,13 +856,13 @@
 	   source addresses to 89 (1424/16).</t>
    </section>
 
-   <section title="5.1.11.  Source Address [i]">
+   <section title="Source Address [i]">
 
    <t>The Source Address [i] fields are a vector of n unicast addresses,
 	   where n is the value in the Number of Sources (N) field.</t>
    </section>
 
-   <section title="5.1.12.  Additional Data">
+   <section title="Additional Data">
 
    <t>If the Payload Length field in the IPv6 header of a received Query
    indicates that there are additional octets of data present, beyond
@@ -873,7 +873,7 @@
 	   fields described above.</t>
    </section>
 
-   <section title="5.1.13.  Query Variants" anchor="qry_vars">
+   <section title="Query Variants" anchor="qry_vars">
 
    <t>There are three variants of the Query message:
    <list style="bullets">
@@ -899,7 +899,7 @@
    </list></t>
    </section>
 
-   <section title="5.1.14.  Source Addresses for Queries">
+   <section title="Source Addresses for Queries">
 
    <t>All MLDv2 Queries MUST be sent with a valid IPv6 link-local source
    address.  If a node (router or host) receives a Query message with
@@ -908,7 +908,7 @@
 	   silently discard the message and SHOULD log a warning.</t>
    </section>
 
-   <section title="5.1.15.  Destination Addresses for Queries">
+   <section title="Destination Addresses for Queries">
 
    <t>In MLDv2, General Queries are sent to the link-scope all-nodes
    multicast address (FF02::1).  Multicast Address Specific and
@@ -921,7 +921,7 @@
    </section>
    </section>
 
-   <section title="5.2.  Version 2 Multicast Listener Report Message">
+   <section title="Version 2 Multicast Listener Report Message">
 
    <t>Version 2 Multicast Listener Reports are sent by IP nodes to report
    (to neighboring routers) the current multicast listening state, or
@@ -1014,13 +1014,13 @@
       ]]></artwork>
    </figure>
 
-   <section title="5.2.1.  Reserved">
+   <section title="Reserved">
 
    <t>The Reserved fields are set to zero on transmission, and ignored on
 	   reception.</t>
    </section>
 
-   <section title="5.2.2.  Checksum">
+   <section title="Checksum">
 
    <t>The standard ICMPv6 checksum; it covers the entire MLDv2 message,
    plus a "pseudo-header" of IPv6 header fields <xref target="RFC2460" /><xref target="RFC2463" />.  In
@@ -1029,52 +1029,52 @@
 	   processing it.</t>
    </section>
 
-   <section title="5.2.3.  Nr of Mcast Address Records (M)">
+   <section title="Nr of Mcast Address Records (M)">
 
    <t>The Nr of Mcast Address Records (M) field specifies how many
 	   Multicast Address Records are present in this Report.</t>
    </section>
 
-   <section title="5.2.4.  Multicast Address Record">
+   <section title="Multicast Address Record">
 
    <t>Each Multicast Address Record is a block of fields that contain
    information on the sender listening to a single multicast address on
 	   the interface from which the Report is sent.</t>
    </section>
 
-   <section title="5.2.5.  Record Type">
+   <section title="Record Type">
 
-   <t>It specifies the type of the Multicast Address Record.  See Section
+   <t>It specifies the type of the Multicast Address Record.  See 
    <xref target="mar_types" /> for a detailed description of the different possible Record
 	   Types.</t>
    </section>
 
-   <section title="5.2.6.  Aux Data Len">
+   <section title="Aux Data Len">
 
    <t>The Aux Data Len field contains the length of the Auxiliary Data
    Field in this Multicast Address Record, in units of 32-bit words.  It
 	   may contain zero, to indicate the absence of any auxiliary data.</t>
    </section>
 
-   <section title="5.2.7.  Number of Sources (N)">
+   <section title="Number of Sources (N)">
 
    <t>The Number of Sources (N) field specifies how many source addresses
 	   are present in this Multicast Address Record.</t>
    </section>
 
-   <section title="5.2.8.  Multicast Address">
+   <section title="Multicast Address">
 
    <t>The Multicast Address field contains the multicast address to which
 	   this Multicast Address Record pertains.</t>
    </section>
 
-   <section title="5.2.9.  Source Address [i]">
+   <section title="Source Address [i]">
 
    <t>The Source Address [i] fields are a vector of n unicast addresses,
 	   where n is the value in this record's Number of Sources (N) field.</t>
    </section>
 
-   <section title="5.2.10.  Auxiliary Data">
+   <section title="Auxiliary Data">
 
    <t>The Auxiliary Data field, if present, contains additional information
    that pertain to this Multicast Address Record.  The protocol
@@ -1087,7 +1087,7 @@
 	   by any future version or extension of MLD that uses this field.</t>
    </section>
 
-   <section title="5.2.11.  Additional Data">
+   <section title="Additional Data">
 
    <t>If the Payload Length field in the IPv6 header of a received Report
    indicates that there are additional octets of data present, beyond
@@ -1098,7 +1098,7 @@
 	   beyond the last Multicast Address Record.</t>
    </section>
 
-   <section title="5.2.12.  Multicast Address Record Types" anchor="mar_types">
+   <section title="Multicast Address Record Types" anchor="mar_types">
 
    <t>There are a number of different types of Multicast Address Records
    that may be included in a Report message:
@@ -1207,7 +1207,7 @@
    </list></t>
    </section>
 
-   <section title="5.2.13.  Source Addresses for Reports" anchor="src_addrs">
+   <section title="Source Addresses for Reports" anchor="src_addrs">
 
    <t>An MLDv2 Report MUST be sent with a valid IPv6 link-local source
    address, or the unspecified address (::), if the sending interface
@@ -1238,13 +1238,13 @@
 	   on the interface.</t>
    </section>
 
-   <section title="5.2.14.  Destination Addresses for Reports" anchor="dest_addr">
+   <section title="Destination Addresses for Reports" anchor="dest_addr">
 
    <t>Version 2 Multicast Listener Reports are sent with an IP destination
    address of FF02:0:0:0:0:0:0:16, to which all MLDv2-capable multicast
-   routers listen (see Section <xref target="iana" /> for IANA considerations related to
+   routers listen (see <xref target="iana" /> for IANA considerations related to
    this special destination address).  A node that operates in version 1
-   compatibility mode (see details in Section <xref target="interop" />) sends version 1 Reports
+   compatibility mode (see details in <xref target="interop" />) sends version 1 Reports
    to the multicast address specified in the Multicast Address field of
    the Report.  In addition, a node MUST accept and process any version
    1 Report whose IP Destination Address field contains any of the
@@ -1253,7 +1253,7 @@
 	   purposes.</t>
    </section>
 
-   <section title="5.2.15.  Multicast Listener Report Size">
+   <section title="Multicast Listener Report Size">
 
    <t>If the set of Multicast Address Records required in a Report does not
    fit within the size limit of a single Report message (as determined
@@ -1281,7 +1281,7 @@
    </section>
    </section>
 
-   <section title="6.  Protocol Description for Multicast Address Listeners" anchor="proto">
+   <section title="Protocol Description for Multicast Address Listeners" anchor="proto">
 
    <t>MLD is an asymmetric protocol, as it specifies separate behaviors for
    multicast address listeners -- that is, hosts or routers that listen
@@ -1291,7 +1291,7 @@
    address listener performs both parts of MLDv2; it receives and it
    responds to its own MLD messages, as well as to those of its
    neighbors.)  The multicast router part of MLDv2 is described in
-	   Section <xref target="mr_proto" />.</t>
+	   <xref target="mr_proto" />.</t>
 
    <t>A node performs the protocol described in this section over all
    interfaces on which multicast reception is supported, even if more
@@ -1303,7 +1303,7 @@
    describes the behavior of multicast address listener nodes on
    interfaces for which Host Compatibility Mode = MLDv2.  The algorithm
    for determining Host Compatibility Mode, and the behavior if its
-	   value is set to MLDv1, are described in Section <xref target="interop" />.</t>
+	   value is set to MLDv1, are described in <xref target="interop" />.</t>
 
    <t>The link-scope all-nodes multicast address, (FF02::1), is handled as
    a special case.  On all nodes -- that is all hosts and routers,
@@ -1330,13 +1330,13 @@
 
    <t>The following subsections describe the actions to be taken for each
    case.  Timer and counter names appear in square brackets.  Default
-	   values for those timers and counters are specified in Section <xref target="timers" />.</t>
+	   values for those timers and counters are specified in <xref target="timers" />.</t>
 
-   <section title="6.1.  Action on Change of Per-Interface State" anchor="chg_if_state">
+   <section title="Action on Change of Per-Interface State" anchor="chg_if_state">
 
    <t>An invocation of IPv6MulticastListen may cause the multicast
    listening state of an interface to change, according to the rules in
-   Section <xref target="if_state" />.  Each such change affects the per-interface entry for a
+   <xref target="if_state" />.  Each such change affects the per-interface entry for a
    single multicast address.</t>
 
    <t>A change of per-interface state causes the node to immediately
@@ -1455,10 +1455,10 @@
 
    <t>The building of a scheduled State Change Report, triggered by the
    firing of a Retransmission Timer, instead of a per-interface
-	   listening state change, is described in Section <xref target="timer_act" />.</t>
+	   listening state change, is described in <xref target="timer_act" />.</t>
    </section>
 
-   <section title="6.2.  Action on Reception of a Query">
+   <section title="Action on Reception of a Query">
 
    <t>Upon reception of an MLD message that contains a Query, the node
    checks if the source address of the message is a valid link-local
@@ -1538,7 +1538,7 @@
    </list></t>
    </section>
 
-   <section title="6.3.  Action on Timer Expiration" anchor="timer_act">
+   <section title="Action on Timer Expiration" anchor="timer_act">
 
    <t>There are several timers that, upon expiration, trigger protocol
    actions on an MLDv2 Multicast Address Listener node.  All these
@@ -1548,7 +1548,7 @@
    <t>If the expired timer is the Interface Timer (i.e., there is a
       pending response to a General Query), then one Current State
       Record is sent for each multicast address for which the specified
-      interface has listening state, as described in Section <xref target="if_state" />.  The
+      interface has listening state, as described in <xref target="if_state" />.  The
       Current State Record carries the multicast address and its
       associated filter mode (MODE_IS_INCLUDE or MODE_IS_EXCLUDE) and
       Source list.  Multiple Current State Records are packed into
@@ -1635,7 +1635,7 @@
       </section>
       </section>
 
-      <section title="7.  Description of the Protocol for Multicast Routers" anchor="mr_proto">
+      <section title="Description of the Protocol for Multicast Routers" anchor="mr_proto">
 
    <t>The purpose of MLD is to enable each multicast router to learn, for
    each of its directly attached links, which multicast addresses have
@@ -1650,7 +1650,7 @@
    <t>This section describes the part of MLDv2 that is performed by
    multicast routers.  Multicast routers may themselves become multicast
    address listeners, and therefore also perform the multicast listener
-	   part of MLDv2, described in Section <xref target="proto" />.</t>
+	   part of MLDv2, described in <xref target="proto" />.</t>
 
    <t>A multicast router performs the protocol described in this section
    over each of its directly attached links.  If a multicast router has
@@ -1676,17 +1676,17 @@
    attached link listens to packets for a particular multicast address
    from a particular source; a multicast router is not required to
    individually keep track of the interests of each neighboring node.
-	   (Nevertheless, see Appendix <xref target="host_suppress" /> item 1 for discussion.)</t>
+	   (Nevertheless, see <xref target="host_suppress" /> item 1 for discussion.)</t>
 
    <t>MLDv2 is backward compatible with the MLDv1 protocol.  For a detailed
-	   description of compatibility issues see Section <xref target="interop" />.</t>
+	   description of compatibility issues see <xref target="interop" />.</t>
 
-   <section title="7.1.  Conditions for MLD Queries" anchor="mld_qrys">
+   <section title="Conditions for MLD Queries" anchor="mld_qrys">
 
    <t>The behavior of a router that implements the MLDv2 protocol depends
    on whether there are several multicast routers on the same subnet, or
    not.  If it is the case, a querier election mechanism (described in
-	   Section <xref target="elect" />) is used to elect a single multicast router to be in
+	   <xref target="elect" />) is used to elect a single multicast router to be in
    Querier state.  All the multicast routers on the subnet listen to the
    messages sent by multicast address listeners, and maintain the same
    multicast listening information state, so that they can quickly and
@@ -1736,10 +1736,10 @@
    multicast address, from the specified source addresses.  Multicast
    Address and Source Specific Queries are only sent in response to
    State Change Records and never in response to Current State Records.
-	   Section <xref target="qry_vars" /> describes each query in more detail.</t>
+	   <xref target="qry_vars" /> describes each query in more detail.</t>
    </section>
 
-   <section title="7.2.  MLD State Maintained by Multicast Routers">
+   <section title="MLD State Maintained by Multicast Routers">
 
    <t>Multicast routers that implement the MLDv2 protocol keep state per
    multicast address per attached link.  This multicast address state
@@ -1769,7 +1769,7 @@
    this multicast address to be forwarded.  This is the MLDv2 equivalent
 	   of an MLDv1 listening state.</t>
 
-   <section title="7.2.1.  Definition of Router Filter Mode">
+   <section title="Definition of Router Filter Mode">
 
    <t>To reduce internal state, MLDv2 routers keep a filter mode per
    multicast address per attached link.  This filter mode is used to
@@ -1779,7 +1779,7 @@
    types of Multicast Address Records or when certain timer conditions
    occur.  In the following sections, we use the term "Router Filter
    Mode" to refer to the filter mode of a particular multicast address
-	   within a router.  Section <xref target="rcv_rpt" /> describes the changes of the Router
+	   within a router.  <xref target="rcv_rpt" /> describes the changes of the Router
 	   Filter Mode per Multicast Address Record received.</t>
 
    <t>A router is in INCLUDE mode for a specific multicast address on a
@@ -1803,21 +1803,21 @@
    to EXCLUDE cease reporting, it is desirable for the Router Filter
    Mode for that multicast address to transition back to INCLUDE mode.
    This transition occurs when the Filter Timer expires, and is
-	   explained in detail in Section <xref target="rtr_mode" />.</t>
+	   explained in detail in <xref target="rtr_mode" />.</t>
 
    <t>When the router is in EXCLUDE mode, the router state is represented
    through the notation EXCLUDE (X,Y), where X is called the "Requested
    List" and Y is called the "Exclude List".  All sources, except those
    from the Exclude List, will be forwarded by the router.  The
    Requested List has no effect on forwarding.  Nevertheless, it has to
-	   be maintained for several reasons, as explained in Section <xref target="src_timers" />.</t>
+	   be maintained for several reasons, as explained in <xref target="src_timers" />.</t>
 
    <t>The exact handling of both the INCLUDE and EXCLUDE mode router state,
    according to the received reports, is presented in details in Tables
 	   7.4.1 and 7.4.2.</t>
    </section>
 
-   <section title="7.2.2.  Definition of Filter Timers">
+   <section title="Definition of Filter Timers">
 
    <t>The Filter Timer is only used when the router is in EXCLUDE mode for
    a specific multicast address, and it represents the time for the
@@ -1830,10 +1830,10 @@
    <t>If a Filter Timer expires, with the Router Filter Mode for that
    multicast address being EXCLUDE, it means that there are no more
    listeners in EXCLUDE mode on the attached link.  At this point, the
-	   router transitions to INCLUDE filter mode.  Section <xref target="rtr_mode" /> describes the
+	   router transitions to INCLUDE filter mode.  <xref target="rtr_mode" /> describes the
 	   actions taken when a Filter Timer expires while in EXCLUDE mode.</t>
 
-   <t>The following table summarizes the role of the Filter Timer.  Section
+   <t>The following table summarizes the role of the Filter Timer. 
    <xref target="rcv_rpt" /> describes the details of setting the Filter Timer per type of
 	   Multicast Address Record received.</t>
 
@@ -1851,16 +1851,16 @@
    </texttable>
    </section>
 
-   <section title="7.2.3.  Definition of Source Timers" anchor="src_timers">
+   <section title="Definition of Source Timers" anchor="src_timers">
 
    <t>A Source Timer is a decrementing timer with a lower bound of zero.
    One Source Timer is kept per source record.  Source timers are
    updated according to the type and filter mode of the Multicast
-	   Address Record received.  Section <xref target="rcv_rpt" /> describes the setting of source
+	   Address Record received.  <xref target="rcv_rpt" /> describes the setting of source
 	   timers per type of Multicast Address Records received.</t>
 
    <t>In the following, abbreviations are used for several variables (all
-	   of which are described in detail in Section <xref target="timers" />).  The variable MALI
+	   of which are described in detail in <xref target="timers" />).  The variable MALI
    stands for the Multicast Address Listening Interval, which is the
    time in which multicast address listening state will time out.  The
    variable LLQT is the Last Listener Query Time, which is the total
@@ -1930,7 +1930,7 @@
       eliminated source(s), and rebuild the Requested List accordingly.
       The protocol ensures that when a switch to INCLUDE mode occurs,
       the Requested List will be accurate.  Details about the transition
-	   of the router to INCLUDE mode are presented in Appendix <xref target="mode_switch" />.</t>
+	   of the router to INCLUDE mode are presented in <xref target="mode_switch" />.</t>
    <t>To allow a fast blocking of previously unblocked sources.  If the
       router receives a report that contains such a request, the
       concerned sources are added to the Requested List.  Their timers
@@ -1953,7 +1953,7 @@
    </section>
    </section>
 
-   <section title="7.3.  MLDv2 Source Specific Forwarding Rules">
+   <section title="MLDv2 Source Specific Forwarding Rules">
 
    <t>When a multicast router receives a datagram from a source destined to
    a particular multicast address, a decision has to be made whether to
@@ -1988,7 +1988,7 @@
    </texttable>
    </section>
 
-   <section title="7.4.  Action on Reception of Reports" anchor="rcv_rpt">
+   <section title="Action on Reception of Reports" anchor="rcv_rpt">
 
    <t>Upon reception of an MLD message that contains a Report, the router
    checks if the source address of the message is a valid link-local
@@ -1997,7 +1997,7 @@
    any of these checks fails, the packet is dropped.  If the validity of
 	   the MLD message is verified, the router starts to process the Report.</t>
 
-   <section title="7.4.1.  Reception of Current State Records">
+   <section title="Reception of Current State Records">
 
    <t>When receiving Current State Records, a router updates both its
    Filter Timer and its source timers.  In some circumstances, the
@@ -2041,7 +2041,7 @@ EXCLUDE (X,Y)     IS_EX (A)     EXCLUDE (A-Y, Y*A) (A-X-Y)=MALI
    </figure>
    </section>
 
-   <section title="7.4.2.  Reception of Filter Mode Change and Source List Change Records" anchor="fm_chg">
+   <section title="Reception of Filter Mode Change and Source List Change Records" anchor="fm_chg">
 
    <t>When a change in the global state of a multicast address occurs in a
    node, the node sends either a Source List Change Record or a Filter
@@ -2098,7 +2098,7 @@ EXCLUDE (X,Y)     IS_EX (A)     EXCLUDE (A-Y, Y*A) (A-X-Y)=MALI
    be retransmitted for the same multicast address, the new and pending
    queries have to be merged.  In addition, received host reports for a
    multicast address with pending queries may affect the contents of
-	   those queries.  Section <xref target="spec_qry" /> describes the process of building and
+	   those queries.  <xref target="spec_qry" /> describes the process of building and
 	   maintaining the state of pending queries.</t>
 
    <figure>
@@ -2136,7 +2136,7 @@ EXCLUDE (X,Y)  TO_IN (A)      EXCLUDE(X+A,Y-A)   (A)=MALI
    </section>
    </section>
 
-   <section title="7.5.  Switching Router Filter Modes" anchor="rtr_mode">
+   <section title="Switching Router Filter Modes" anchor="rtr_mode">
 
    <t>The Filter Timer is used as a mechanism for transitioning the Router
 	   Filter Mode from EXCLUDE to INCLUDE.</t>
@@ -2157,7 +2157,7 @@ EXCLUDE (X,Y)  TO_IN (A)      EXCLUDE(X+A,Y-A)   (A)=MALI
 	   router.</t>
    </section>
 
-   <section title="7.6.  Action on Reception of Queries">
+   <section title="Action on Reception of Queries">
 
    <t>Upon reception of an MLD message that contains a Query, the router
    checks if the source address of the message is a valid link-local
@@ -2168,10 +2168,10 @@ EXCLUDE (X,Y)  TO_IN (A)      EXCLUDE(X+A,Y-A)   (A)=MALI
    <t>If the validity of the MLD message is verified, the router starts to
 	   process the Query.</t>
 
-   <section title="7.6.1.  Timer Updates">
+   <section title="Timer Updates">
 
    <t>MLDv2 uses the Suppress Router-Side Processing flag to ensure
-	   robustness, as explained in Section <xref target="build_state" />.  When a router sends or
+	   robustness, as explained in <xref target="build_state" />.  When a router sends or
    receives a query with a clear Suppress Router-Side Processing flag,
    it must update its timers to reflect the correct timeout values for
    the multicast address or sources being queried.  The following table
@@ -2192,14 +2192,14 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   Processing flag set, it will not update its timers.</t>
    </section>
 
-   <section title="7.6.2.  Querier Election" anchor="elect">
+   <section title="Querier Election" anchor="elect">
 
    <t>MLDv2 elects a single router per subnet to be in Querier state; all
    the other routers on the subnet should be in Non-Querier state. MLDv2
    uses the same querier election mechanism as MLDv1, namely the IPv6
    address.  When a router starts operating on a subnet, by default it
    considers itself as being the Querier.  Thus, it sends several
-	   General Queries separated by a small time interval (see Sections <xref target="start_qry_int" />
+	   General Queries separated by a small time interval (see <xref target="start_qry_int" />
 		   and <xref target="start_qry_cnt" /> for details).</t>
 
    <t>When a router receives a query with a lower IPv6 address than its
@@ -2217,9 +2217,9 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   represented by the last 64 bits of address B.</t>
    </section>
 
-   <section title="7.6.3.  Building and Sending Specific Queries" anchor="spec_qry">
+   <section title="Building and Sending Specific Queries" anchor="spec_qry">
 
-   <section title="7.6.3.1.  Building and Sending Multicast Address Specific Queries">
+   <section title="Building and Sending Multicast Address Specific Queries">
 
    <t>When a table action "Send Q(MA)" is encountered, the Filter Timer
    must be lowered to LLQT.  The Querier must then immediately send a
@@ -2231,10 +2231,10 @@ Q(MA)       Filter Timer is lowered to LLQT
    Timer is larger than LLQT, the "Suppress Router-Side Processing" bit
 	   is set in the query message.</t>
    </section>
-   <section title="7.6.3.2.  Building and Sending Multicast Address and Source Specific Queries">
+   <section title="Building and Sending Multicast Address and Source Specific Queries">
 
    <t>When a table action "Send Q(MA,X)" is encountered by the Querier in
-   the table in Section <xref target="fm_chg" />, the following actions must be performed
+   the table in <xref target="fm_chg" />, the following actions must be performed
    for each of the sources in X that send to multicast address MA, with
    source timer larger than LLQT:
    <list style="bullets">
@@ -2270,7 +2270,7 @@ Q(MA)       Filter Timer is lowered to LLQT
    </section>
    </section>
 
-   <section title="8.  Interoperation with MLDv1" anchor="interop">
+   <section title="Interoperation with MLDv1" anchor="interop">
 
    <t>MLD version 2 hosts and routers interoperate with hosts and routers
    that have not yet been upgraded to MLDv2.  This compatibility is
@@ -2278,7 +2278,7 @@ Q(MA)       Filter Timer is lowered to LLQT
    on the versions of MLD operating on hosts and routers within a
 	   network.</t>
 
-   <section title="8.1.  Query Version Distinctions">
+   <section title="Query Version Distinctions">
 
    <t>The MLD version of a Multicast Listener Query message is determined
    as follows:
@@ -2291,9 +2291,9 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   Query of length 26 octets) MUST be silently ignored.</t>
    </section>
 
-   <section title="8.2.  Multicast Address Listener Behavior">
+   <section title="Multicast Address Listener Behavior">
 
-   <section title="8.2.1.  In the Presence of MLDv1 Routers">
+   <section title="In the Presence of MLDv1 Routers">
    <t>In order to be compatible with MLDv1 routers, MLDv2 hosts MUST
    operate in version 1 compatibility mode.  MLDv2 hosts MUST keep state
    per local interface regarding the compatibility mode of each attached
@@ -2317,13 +2317,13 @@ Q(MA)       Filter Timer is lowered to LLQT
    <t>An MLDv1 Querier will send General Queries with the Maximum Response
    Code set to the desired Maximum Response Delay, i.e., the full range
    of this field is linear and the exponential algorithm described in
-	   Section <xref target="mrcode" />. is not used.</t>
+	   <xref target="mrcode" />. is not used.</t>
 
    <t>Whenever a host changes its compatibility mode, it cancels all its
 	   pending responses and retransmission timers.</t>
    </section>
 
-   <section title="8.2.2.  In the Presence of MLDv1 Multicast Address Listeners">
+   <section title="In the Presence of MLDv1 Multicast Address Listeners">
 
    <t>An MLDv2 host may be placed on a link where there are MLDv1 hosts.  A
    host MAY allow its MLDv2 Multicast Listener Report to be suppressed
@@ -2331,8 +2331,8 @@ Q(MA)       Filter Timer is lowered to LLQT
    </section>
    </section>
 
-   <section title="8.3.  Multicast Router Behavior">
-   <section title="8.3.1.  In the Presence of MLDv1 Routers">
+   <section title="Multicast Router Behavior">
+   <section title="In the Presence of MLDv1 Routers">
 
    <t>MLDv2 routers may be placed on a network where there is at least one
    MLDv1 router.  The following requirements apply:
@@ -2348,7 +2348,7 @@ Q(MA)       Filter Timer is lowered to LLQT
       bytes long), and SHOULD also warn about receiving an MLDv2 Query
       (such warnings must be rate-limited).  The Querier MUST also fill
       in the Maximum Response Delay in the Maximum Response Code field,
-      i.e., the exponential algorithm described in Section <xref target="mrcode" />. is not
+      i.e., the exponential algorithm described in <xref target="mrcode" />. is not
 	      used.</t>
    <t>If a router is not explicitly configured to use MLDv1 and receives
       an MLDv1 General Query, it SHOULD log a warning.  These warnings
@@ -2356,7 +2356,7 @@ Q(MA)       Filter Timer is lowered to LLQT
    </list></t>
    </section>
 
-   <section title="8.3.2.  In the Presence of MLDv1 Multicast Address Listeners">
+   <section title="In the Presence of MLDv1 Multicast Address Listeners">
 
    <t>MLDv2 routers may be placed on a network where there are hosts that
    have not yet been upgraded to MLDv2.  In order to be compatible with
@@ -2403,14 +2403,14 @@ Q(MA)       Filter Timer is lowered to LLQT
    </section>
    </section>
 
-   <section title="9.  List of Timers, Counters, and their Default Values" anchor="timers">
+   <section title="List of Timers, Counters, and their Default Values" anchor="timers">
 
    <t>Most of these timers are configurable.  If non-default settings are
    used, they MUST be consistent among all nodes on a single link.  Note
    that parentheses are used to group expressions to make the algebra
 	   clear.</t>
 
-   <section title="9.1.  Robustness Variable" anchor="robust">
+   <section title="Robustness Variable" anchor="robust">
 
    <t>The Robustness Variable allows tuning for the expected packet loss on
    a link.  If a link is expected to be lossy, the value of the
@@ -2419,7 +2419,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   MUST NOT be zero, and SHOULD NOT be one.  Default value: 2.</t>
    </section>
 
-   <section title="9.2.  Query Interval" anchor="qry_int">
+   <section title="Query Interval" anchor="qry_int">
 
    <t>The Query Interval variable denotes the interval between General
 	   Queries sent by the Querier.  Default value: 125 seconds.</t>
@@ -2429,7 +2429,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   sent less often.</t>
    </section>
 
-   <section title="9.3.  Query Response Interval">
+   <section title="Query Response Interval">
 
    <t>The Maximum Response Delay used to calculate the Maximum Response
    Code inserted into the periodic General Queries.  Default value:
@@ -2442,7 +2442,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   Interval] must be less than the [Query Interval].</t>
    </section>
 
-   <section title="9.4.  Multicast Address Listening Interval">
+   <section title="Multicast Address Listening Interval">
 
    <t>The Multicast Address Listening Interval (MALI) is the amount of time
    that must pass before a multicast router decides there are no more
@@ -2451,7 +2451,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   plus [Query Response Interval].</t>
    </section>
 
-   <section title="9.5.  Other Querier Present Timeout">
+   <section title="Other Querier Present Timeout">
 
    <t>The Other Querier Present Timeout is the length of time that must
    pass before a multicast router decides that there is no longer
@@ -2460,21 +2460,21 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   half of [Query Response Interval]).</t>
    </section>
 
-   <section title="9.6.  Startup Query Interval" anchor="start_qry_int">
+   <section title="Startup Query Interval" anchor="start_qry_int">
 
    <t>The Startup Query Interval is the interval between General Queries
    sent by a Querier on startup.  Default value: 1/4 the [Query
 	   Interval].</t>
    </section>
 
-   <section title="9.7.  Startup Query Count" anchor="start_qry_cnt">
+   <section title="Startup Query Count" anchor="start_qry_cnt">
 
    <t>The Startup Query Count is the number of Queries sent out on startup,
    separated by the Startup Query Interval.  Default value: [Robustness
 	   Variable].</t>
    </section>
 
-   <section title="9.8.  Last Listener Query Interval">
+   <section title="Last Listener Query Interval">
 
    <t>The Last Listener Query Interval is the Maximum Response Delay used
    to calculate the Maximum Response Code inserted into Multicast
@@ -2496,7 +2496,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   last listener for a multicast address or source.</t>
    </section>
 
-   <section title="9.9.  Last Listener Query Count">
+   <section title="Last Listener Query Count">
 
    <t>The Last Listener Query Count is the number of Multicast Address
    Specific Queries sent before the router assumes there are no local
@@ -2506,7 +2506,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   value: [Robustness Variable].</t>
    </section>
 
-   <section title="9.10.  Last Listener Query Time">
+   <section title="Last Listener Query Time">
 
    <t>The Last Listener Query Time is the time value represented by the
    Last Listener Query Interval, multiplied by [Last Listener Query
@@ -2514,14 +2514,14 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   components.</t>
    </section>
 
-   <section title="9.11.  Unsolicited Report Interval">
+   <section title="Unsolicited Report Interval">
 
    <t>The Unsolicited Report Interval is the time between repetitions of a
    node's initial report of interest in a multicast address.  Default
 	   value: 1 second.</t>
    </section>
 
-   <section title="9.12.  Older Version Querier Present Timeout">
+   <section title="Older Version Querier Present Timeout">
 
    <t>The Older Version Querier Present Timeout is the time-out for
    transitioning a host back to MLDv2 Host Compatibility Mode.  When an
@@ -2532,7 +2532,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   in the last Query received)) plus ([Query Response Interval]).</t>
    </section>
 
-   <section title="9.13.  Older Version Host Present Timeout">
+   <section title="Older Version Host Present Timeout">
 
    <t>The Older Version Host Present Timeout is the time-out for
    transitioning a router back to MLDv2 Multicast Address Compatibility
@@ -2544,14 +2544,14 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   plus ([Query Response Interval]).</t>
    </section>
 
-   <section title="9.14.  Configuring timers">
+   <section title="Configuring timers">
 
    <t>This section is meant to provide advice to network administrators on
    how to tune these settings to their network.  Ambitious router
    implementations might tune these settings dynamically based upon
 	   changing characteristics of the network.</t>
 
-   <section title="9.14.1.  Robustness Variable">
+   <section title="Robustness Variable">
 
    <t>The Robustness Variable tunes MLD to expected losses on a link.
    MLDv2 is robust to [Robustness Variable] - 1 packet losses, e.g., if
@@ -2565,7 +2565,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   the traffic stops flowing).</t>
    </section>
 
-   <section title="9.14.2.  Query Interval">
+   <section title="Query Interval">
 
    <t>The overall level of periodic MLD traffic is inversely proportional
    to the Query Interval.  A longer Query Interval results in a lower
@@ -2575,7 +2575,7 @@ Q(MA)       Filter Timer is lowered to LLQT
 	   messages.</t>
    </section>
 
-   <section title="9.14.3.  Maximum Response Delay">
+   <section title="Maximum Response Delay">
 
    <t>The burstiness of MLD traffic is inversely proportional to the
    Maximum Response Delay.  A longer Maximum Response Delay will spread
@@ -2609,7 +2609,7 @@ Multicast Address and Source       All nodes on the link that had
    </section>
    </section>
 
-   <section title="10.  Security Considerations">
+   <section title="Security Considerations">
 
    <t>We consider the ramifications of a forged message of each type.  Note
    that before processing an MLD message, nodes verify if the source
@@ -2621,7 +2621,7 @@ Multicast Address and Source       All nodes on the link that had
    off-link.  Therefore, in the following we discuss only the effects of
 	   on-link forgery.</t>
 
-   <section title="10.1.  Query Message">
+   <section title="Query Message">
 
    <t>A forged Query message from a machine with a lower IPv6 address than
    the current Querier will cause Querier duties to be assigned to the
@@ -2654,7 +2654,7 @@ Multicast Address and Source       All nodes on the link that had
    only a limited number of sources.</t>
    </section>
 
-   <section title="10.2.  Current State Report messages">
+   <section title="Current State Report messages">
 
    <t>A forged Report message may cause multicast routers to think there
    are listeners of a multicast address on a link when there are not.
@@ -2673,7 +2673,7 @@ Multicast Address and Source       All nodes on the link that had
    filtering is critical.</t>
    </section>
 
-   <section title="10.3.  State Change Report messages">
+   <section title="State Change Report messages">
 
    <t>A forged State Change Report message will cause the Querier to send
    out Multicast Address Specific or Multicast Address and Source
@@ -2683,16 +2683,16 @@ Multicast Address and Source       All nodes on the link that had
    </section>
    </section>
 
-   <section title="11.  IANA Considerations" anchor="iana">
+   <section title="IANA Considerations" anchor="iana">
 
    <t>IANA has assigned the IPv6 link-local multicast address
    FF02:0:0:0:0:0:0:16, called "all MLDv2-capable routers", as described
-   in Section <xref target="dest_addr" />.  Version 2 Multicast Listener Reports will be sent
+   in <xref target="dest_addr" />.  Version 2 Multicast Listener Reports will be sent
    to this special address.</t>
 
    <t>In addition, IANA has assigned the ICMPv6 message type value of 143
    for Version 2 Multicast Listener Report messages, as specified in
-   Section <xref target="node_state" />.</t>
+   <xref target="node_state" />.</t>
    </section>
 
    <section title="Acknowledgments">
@@ -2739,7 +2739,7 @@ Multicast Address and Source       All nodes on the link that had
    not cause transitions in state at the router.  Multicast Listener
    Reports that are sent in response to changes in the per-interface
    state require the router to take some action in response to the
-	   received report (see Section <xref target="rcv_rpt" />).</t>
+	   received report (see <xref target="rcv_rpt" />).</t>
 
    <t>The inability to distinguish between the two types of reports would
    force a router to treat all Multicast Listener Reports as potential
@@ -2827,7 +2827,7 @@ Multicast Address and Source       All nodes on the link that had
       listeners on the link.  MLDv1 routers kept only the list of
 	   multicast addresses.</t>
 
-   <t>Queries include additional fields (Section <xref target="qry_msg" />).</t>
+   <t>Queries include additional fields (<xref target="qry_msg" />).</t>
 
    <t>The S flag (Suppress Router-Side Processing) is included in
 	   queries in order to fix robustness issues.</t>

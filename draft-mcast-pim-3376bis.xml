@@ -359,7 +359,7 @@
 
    <t>An implementation of IGMPv3 MUST also support the following three
    message types, for interoperation with previous versions of IGMP (see
-	   Section <xref target="interop" />):</t>
+	   <xref target="interop" />):</t>
 
    <texttable anchor="legacy-msgs" title="Legacy IGMP messages">
 	   <ttcol align="center">Type Number (hex)</ttcol>
@@ -508,7 +508,7 @@
    value from the most recently received Query as their own [Query
    Interval] value, unless that most recently received QQI was zero, in
    which case the receiving routers use the default [Query Interval]
-	   value specified in Section <xref target="qry_int" />.</t>
+	   value specified in <xref target="qry_int" />.</t>
    </section>
 
    <section title="Number of Sources (N)">
@@ -901,7 +901,7 @@
    multicast router that is also a group member performs both parts of
    IGMPv3, receiving and responding to its own IGMP message
    transmissions as well as those of its neighbors.  The multicast
-	   router part of IGMPv3 is described in Section <xref target="mcast_rtrs" />.)</t>
+	   router part of IGMPv3 is described in <xref target="mcast_rtrs" />.)</t>
 
    <t>A system performs the protocol described in this section over all
    interfaces on which multicast reception is supported, even if more
@@ -913,7 +913,7 @@
    describes the behavior of group member systems on interfaces for
    which MulticastRouterVersion = 3.  The algorithm for determining
    MulticastRouterVersion, and the behavior for versions other than 3,
-	   are described in Section <xref target="interop" />.</t>
+	   are described in <xref target="interop" />.</t>
 
    <t>The all-systems multicast address, 224.0.0.1, is handled as a special
    case.  On all systems -- that is all hosts and routers, including
@@ -939,7 +939,7 @@
    <t>The following subsections describe the actions to be taken for each
    of these two cases.  In those descriptions, timer and counter names
    appear in square brackets.  The default values for those timers and
-	   counters are specified in Section <xref target="timers" />.</t>
+	   counters are specified in <xref target="timers" />.</t>
 
    <section title="Action on Change of Interface State">
 
@@ -1116,12 +1116,12 @@
    <t>If the expired timer is the interface timer (i.e., it is a pending
       response to a General Query), then one Current-State Record is
       sent for each multicast address for which the specified interface
-	   has reception state, as described in Section <xref target="if_state" />.  The Current-
+	   has reception state, as described in <xref target="if_state" />.  The Current-
       State Record carries the multicast address and its associated
       filter mode (MODE_IS_INCLUDE or MODE_IS_EXCLUDE) and source list.
       Multiple Current-State Records are packed into individual Report
       messages, to the extent possible.
-      <vspace />
+      <vspace blankLines="1" />
       This naive algorithm may result in bursts of packets when a system
       is a member of a large number of groups.  Instead of using a
       single interface timer, implementations are recommended to spread
@@ -1177,7 +1177,7 @@
    <t>This section describes the part of IGMPv3 that is performed by
    multicast routers.  Multicast routers may also themselves become
    members of multicast groups, and therefore also perform the group
-	   member part of IGMPv3, described in Section <xref target="grp_mbrs" />.</t>
+	   member part of IGMPv3, described in <xref target="grp_mbrs" />.</t>
 
    <t>A multicast router performs the protocol described in this section
    over each of its directly-attached networks.  If a multicast router
@@ -1192,7 +1192,7 @@
    attached network is interested in packets to a particular multicast
    address from a particular source; a multicast router is not required
    to keep track of the interests of each individual neighboring system.
-	   (However, see Appendix <xref target="suppression" /> point 1 for discussion.)</t>
+	   (However, see <xref target="suppression" /> point 1 for discussion.)</t>
 
    <t>IGMPv3 is backward compatible with previous versions of the IGMP
    protocol.  In order to remain backward compatible with older IGMP
@@ -1235,7 +1235,7 @@
    desire reception of packets to the specified group address from the
    specified source addresses.  Group-and-Source Specific Queries are
    only sent in response to State-Change Records and never in response
-	   to Current-State Records.  Section <xref target="qry_vars" /> describes each query in
+	   to Current-State Records.  <xref target="qry_vars" /> describes each query in
 	   more detail.</t>
    </section>
 
@@ -1277,7 +1277,7 @@
    response to the reception of particular types of group records or
    when certain timer conditions occur.  In the following sections, we
    use the term "router filter-mode" to refer to the filter-mode of a
-	   particular group within a router.  Section <xref target="rcv_rpts" /> describes the changes
+	   particular group within a router.  <xref target="rcv_rpts" /> describes the changes
    of a router filter-mode per group record received.</t>
 
    <t>Conceptually, when a group record is received, the router filter-mode
@@ -1290,8 +1290,8 @@
    list contains two types of sources.  The first type is the set which
    represents conflicts in the desired reception state; this set must be
    forwarded by some router on the network.  The second type is the set
-   of sources which hosts have requested to not be forwarded.  Appendix
-   A describes the reasons for keeping this second set when in EXCLUDE
+   of sources which hosts have requested to not be forwarded.  <xref target="rationale" />
+   describes the reasons for keeping this second set when in EXCLUDE
 	   mode.</t>
 
    <t>When a router filter-mode for a group is INCLUDE, the source record
@@ -1306,7 +1306,7 @@
    filter-mode cease reporting, it is desirable for the router filter-
    mode for that group to transition back to INCLUDE mode.  This
    transition occurs when the group timer expires and is explained in
-	   detail in Section <xref target="fltr_modes" />.</t>
+	   detail in <xref target="fltr_modes" />.</t>
    </section>
 
    <section title="Definition of Group Timers">
@@ -1321,7 +1321,7 @@
    <t>A group timer expiring when a router filter-mode for the group is
    EXCLUDE means there are no listeners on the attached network in
    EXCLUDE mode.  At this point, a router will transition to INCLUDE
-	   filter-mode.  Section <xref target="fltr_modes" /> describes the actions taken when a group
+	   filter-mode.  <xref target="fltr_modes" /> describes the actions taken when a group
 	   timer expires while in EXCLUDE mode.</t>
 
    <t>The following table summarizes the role of the group timer.  Section
@@ -1347,8 +1347,8 @@
    with a lower bound of zero.  Source timers are updated according to
    the type and filter-mode of the group record received.  Source timers
    are always updated (for a particular group) whenever the source is
-	   present in a received record for that group.  Section <xref target="rcv_rpts" /> describes
-	   the setting of source timers per type of group records received.</t>
+   present in a received record for that group.  <xref target="rcv_rpts" /> describes
+   the setting of source timers per type of group records received.</t>
 
    <t>A source record with a running timer with a router filter-mode for
    the group of INCLUDE means that there is currently one or more
@@ -1356,25 +1356,25 @@
    If a source timer expires with a router filter-mode for the group of
    INCLUDE, the router concludes that traffic from this particular
    source is no longer desired on the attached network, and deletes the
-	   associated source record.</t>
+   associated source record.</t>
 
    <t>Source timers are treated differently when a router filter-mode for a
    group is EXCLUDE.  If a source record has a running timer with a
    router filter-mode for the group of EXCLUDE, it means that at least
    one system desires the source.  It should therefore be forwarded by a
-   router on the network.  Appendix A describes the reasons for keeping
+   router on the network.  <xref target="rationale" /> describes the reasons for keeping
    state for sources that have been requested to be forwarded while in
-	   EXCLUDE state.</t>
+   EXCLUDE state.</t>
 
    <t>If a source timer expires with a router filter-mode for the group of
    EXCLUDE, the router informs the routing protocol that there is no
    longer a receiver on the network interested in traffic from this
-	   source.</t>
+   source.</t>
 
    <t>When a router filter-mode for a group is EXCLUDE, source records are
-   only deleted when the group timer expires.  Section <xref target="ss_fwd" /> describes the
+   only deleted when the group timer expires.  <xref target="ss_fwd" /> describes the
    actions that should be taken dependent upon the value of a source
-	   timer.</t>
+   timer.</t>
    </section>
    </section>
 
@@ -1444,7 +1444,7 @@
    requested to be forwarded (e.g., simply (A)).</t>
 
    <t>In the following tables, abbreviations are used for several variables
-	   (all of which are described in detail in Section <xref target="timers" />).  The variable
+	   (all of which are described in detail in <xref target="timers" />).  The variable
    GMI is an abbreviation for the Group Membership Interval, which is
    the time in which group memberships will time out.  The variable LMQT
    is an abbreviation for the Last Member Query Time, which is the total
@@ -1645,7 +1645,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    <section title="Building and Sending Group and Source Specific Queries">
 
    <t>When a table action "Send Q(G,X)" is encountered by a querier in the
-	   table in Section <xref target="slc_recs" />, the following actions must be performed for
+	   table in <xref target="slc_recs" />, the following actions must be performed for
    each of the sources in X of group G, with source timer larger than
    LMQT:
    <list style="symbols">
@@ -1756,7 +1756,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
 
    <t>An IGMPv2 router will send General Queries with the Max Resp Code set
    to the desired Max Resp Time, i.e., the full range of this field is
-	   linear and the exponential algorithm described in Section <xref target="max_resp_code" /> is
+	   linear and the exponential algorithm described in <xref target="max_resp_code" /> is
    not used.</t>
 
    <t>Whenever a host changes its compatibility mode, it cancels all its
@@ -1794,7 +1794,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
      and SHOULD also warn about receiving an IGMPv3 query (such warnings
      MUST be rate-limited).  They also MUST fill in the Max Resp Time in
      the Max Resp Code field, i.e., the exponential algorithm described
-	   in Section <xref target="max_resp_code" /> is not used.</t>
+	   in <xref target="max_resp_code" /> is not used.</t>
 
    <t>If a router is not explicitly configured to use IGMPv1 or IGMPv2
      and hears an IGMPv1 Query or IGMPv2 General Query, it SHOULD log a
@@ -2270,7 +2270,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    the router; they typically do not cause transitions in state at the
    router.  Membership Reports that are sent in response to changes in
    interface state require the router to take some action in response to
-	   the received report (see Section <xref target="rcv_rpts" />).</t>
+	   the received report (see <xref target="rcv_rpts" />).</t>
 
    <t>The inability to distinguish between the two types of reports would
    force a router to treat all Membership Reports as potential changes
