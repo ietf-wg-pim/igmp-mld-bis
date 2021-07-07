@@ -776,7 +776,7 @@
 	   allow the tuning of the burstiness of MLD traffic on a link.</t>
    </section>
 
-   <section title="Reserved">
+   <section title="Resv">
 
 	   <t>Initialized to zero by the sender; ignored by receivers.</t>
    </section>
@@ -788,6 +788,12 @@
    Specific Query, it is set to the multicast address being queried (see
 	   <xref target="num_srcs" />, below).</t>
    </section>
+
+   <section title="Reserv">
+
+	   <t>Initialized to zero by the sender; ignored by receivers.</t>
+   </section>
+
 
    <section title="S Flag (Suppress Router-Side Processing)">
 
