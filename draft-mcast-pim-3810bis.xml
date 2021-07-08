@@ -776,7 +776,7 @@
 	   allow the tuning of the burstiness of MLD traffic on a link.</t>
    </section>
 
-   <section title="Resv">
+   <section title="Reserved">
 
 	   <t>Initialized to zero by the sender; ignored by receivers.</t>
    </section>
@@ -789,7 +789,7 @@
 	   <xref target="num_srcs" />, below).</t>
    </section>
 
-   <section title="Reserv">
+   <section title="Resv">
 
 	   <t>Initialized to zero by the sender; ignored by receivers.</t>
    </section>
