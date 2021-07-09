@@ -1998,16 +1998,19 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    host's initial report of membership in a group.  Default: 1 second.</t>
 
    </section>
-   <section title="Older Version Querier Present Timeout">
+   <section title="Older Version Querier Present Interval">
 
-   <t>The Older Version Querier Interval is the time-out for transitioning
+   <t>The Older Version Querier Present Interval is the time-out for transitioning
    a host back to IGMPv3 mode once an older version query is heard.
    When an older version query is received, hosts set their Older
    Version Querier Present Timer to Older Version Querier Interval.</t>
 
-   <t>This value MUST be ((the Robustness Variable) times (the Query
-   Interval in the last Query received)) plus (one Query Response
-   Interval).</t>
+   <t>It is RECOMMENDED to use the default values for calculating the interval 
+   value. Default value of the Robustness variable is 2 and the Query interval 
+   is 125 seconds.</t>
+	   
+   <t>This value SHOULD be ((the Robustness Variable) times (the Query
+   Interval)) plus (1/10)th of the (maximum response time).</t>
 
    </section>
    <section title="Older Host Present Interval">
