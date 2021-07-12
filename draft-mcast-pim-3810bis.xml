@@ -17,12 +17,6 @@
         <email>brian@innovationslab.net</email>
       </address>
    </author>
-   <author fullname="Roland Vida" initials="R." surname="Vida"></author>
-   <author fullname="Luis Henrique Maciel Kosmalski Costa" initials="L." surname="Costa"></author>
-   <author fullname="Serge Fdida" initials="S." surname="Fdida"></author>
-   <author fullname="Steve Deering" initials="S." surname="Deering"></author>
-   <author fullname="Bill Fenner" initials="B." surname="Fenner"></author>
-   <author fullname="Isidor Kouvelas" initials="I." surname="Kouvelas"></author>
 
    <date month="July" year="2021" />
 
@@ -2703,6 +2697,12 @@ Multicast Address and Source       All nodes on the link that had
    <xref target="node_state" />.</t>
    </section>
 
+   <section title="Contributors">
+   <t>Roland Vida, Luis Henrique Maciel Kosmalski Costa, Serge Fdida,
+   Steve Deering, Bill Fenner, and Isidor Kouvelas are the authors of
+   RFC 3810, which makes up the majority of the content in this document.</t>
+   </section>
+
    <section title="Acknowledgments">
    <t>We would like to thank Hitoshi Asaeda, Randy Bush, Francis Dupont,
    Ted Hardie, Russ Housley, Konstantin Kabassanov, Erik Nordmark,
@@ -2882,11 +2882,12 @@ Multicast Address and Source       All nodes on the link that had
    </list></t>
    </section>
    <section title="MLDv2">
+   <t>The following summarizes the changes made since RFC 3810.
    <list style="bullets">
 	   <t>Added definition of Resv to address Erratum 4773.</t>
 	   <t>Added clarifying text on which multicast addresses require the sending of MLD messages
-		   to address Erratum 5977.</t>
-   </list>
+	   to address Erratum 5977.</t>
+   </list></t>
    </section>
    </section>
  </back>

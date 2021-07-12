@@ -17,11 +17,6 @@
         <email>brian@innovationslab.net</email>
       </address>
    </author>
-   <author fullname="Brad Cain" initials="B." surname="Cain"></author>
-   <author fullname="Steve Deering" initials="S." surname="Deering"></author>
-   <author fullname="Isidor Kouvelas" initials="I." surname="Kouvelas"></author>
-   <author fullname="Bill Fenner" initials="B." surname="Fenner"></author>
-   <author fullname="Ajit Thyagarajan" initials="A." surname="Thyagarajan"></author>
 
    <date month="July" year="2021" />
 
@@ -1999,7 +1994,6 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
 
    </section>
    <section title="Older Version Querier Present Interval">
-
    <t>The Older Version Querier Present Interval is the timeout for transitioning
    a host back to IGMPv3 mode once an older version query is heard.
    When an older version query is received, hosts set their Older
@@ -2233,6 +2227,11 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    <xref target="RFC3228" />.</t>
    </section>
 
+   <section title="Contributors">
+   <t>Brad Cain, Steve Deering, Isidor Kouvelas, Bill Fenner, and Ajit Thyagarajan
+   are the authors of RFC 3376, which forms the bulk of the content contained herein.</t>
+   </section>
+
    <section title="Acknowledgments">
    <t>We would like to thank Ran Atkinson, Luis Costa, Toerless Eckert,
    Dino Farinacci, Serge Fdida, Wilbert de Graaf, Sumit Gupta, Mark
@@ -2373,10 +2372,11 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    </section>
 
    <section title="Summary of Changes from RFC 3376">
-	   <list style="symbols">
-		   <t>Modified definition of Older Version Querier Present
-			   Interval to address Erratum 4375.</t>
-	   </list>
+   <t>The following is a list of changes made since RFC 3376.
+   <list style="symbols">
+	   <t>Modified definition of Older Version Querier Present
+	   Interval to address Erratum 4375.</t>
+   </list></t>
    </section>
  </back>
 </rfc>
