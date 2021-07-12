@@ -24,7 +24,7 @@
    <author fullname="Bill Fenner" initials="B." surname="Fenner"></author>
    <author fullname="Isidor Kouvelas" initials="I." surname="Kouvelas"></author>
 
-   <date month="June" year="2021" />
+   <date month="July" year="2021" />
 
    <abstract>
    <t>This document updates RFC 2710, and it specifies Version 2 of the
@@ -97,22 +97,22 @@
 	   node.  (Nevertheless, see <xref target="host_suppress" /> item 1 for discussion.)</t>
 
    <t>A multicast router performs the router part of the MLDv2 protocol
-	   (described in details in <xref target="mr_proto" />) on each of its directly attached
+   (described in details in <xref target="mr_proto" />) on each of its directly attached
    links.  If a multicast router has more than one interface connected
    to the same link, it only needs to operate the protocol on one of
    those interfaces.  The router behavior depends on whether there are
    several multicast routers on the same subnet, or not.  If that is the
-		   case, a querier election mechanism (described in <xref target="elect" />) is
+   case, a querier election mechanism (described in <xref target="elect" />) is
    used to elect a single multicast router to be in Querier state.  This
    router is called the Querier.  All multicast routers on the subnet
    listen to the messages sent by multicast address listeners, and
    maintain the same multicast listening information state, so that they
    can take over the querier role, should the present Querier fail.
    Nevertheless, only the Querier sends periodical or triggered query
-		   messages on the subnet, as described in <xref target="mld_qrys" />.</t>
+   messages on the subnet, as described in <xref target="mld_qrys" />.</t>
 
    <t>A multicast address listener performs the listener part of the
-	   MLDv2 protocol (described in details in <xref target="proto" />) on all interfaces
+   MLDv2 protocol (described in details in <xref target="proto" />) on all interfaces
    on which multicast reception is supported, even if more than one of
    those interfaces are connected to the same link.</t>
 
@@ -155,7 +155,7 @@
    Specific Queries.  The Querier periodically sends General Queries, to
    learn multicast address listener information from an attached link.
    These queries are used to build and refresh the Multicast Address
-	   Listener state inside all multicast routers on the link.</t>
+   Listener state inside all multicast routers on the link.</t>
 
    <t>Nodes respond to these queries by reporting their per-interface
    Multicast Address Listening state, through Current State Report
@@ -165,7 +165,7 @@
    State Change Report message.  The State Change Report contains either
    Filter Mode Change records, Source List Change records, or records of
    both types.  A detailed description of the report messages is
-	   presented in <xref target="mar_types" />.</t>
+   presented in <xref target="mar_types" />.</t>
 
    <t>Both router and listener state changes are mainly triggered by the
    expiration of a specific timer, or the reception of an MLD message
@@ -174,14 +174,14 @@
    in spite of the possible unreliability of message exchanges, messages
    are retransmitted several times.  Furthermore, timers are set so as
    to take into account the possible message losses, and to wait for
-	   retransmissions.</t>
+   retransmissions.</t>
 
    <t>Periodical General Queries and Current State Reports do not apply
    this rule, in order not to overload the link; it is assumed that in
    general these messages do not generate state changes, their main
    purpose being to refresh existing state.  Thus, even if one such
    message is lost, the corresponding state will be refreshed during the
-	   next reporting period.</t>
+   next reporting period.</t>
 
    <t>As opposed to Current State Reports, State Change Reports are
    retransmitted several times, in order to avoid them being missed by
@@ -1297,11 +1297,11 @@
    address listener performs both parts of MLDv2; it receives and it
    responds to its own MLD messages, as well as to those of its
    neighbors.)  The multicast router part of MLDv2 is described in
-	   <xref target="mr_proto" />.</t>
+   <xref target="mr_proto" />.</t>
 
    <t>A node performs the protocol described in this section over all
    interfaces on which multicast reception is supported, even if more
-	   than one of those interfaces are connected to the same link.</t>
+   than one of those interfaces are connected to the same link.</t>
 
    <t>For interoperability with multicast routers that run the MLDv1
    protocol, nodes maintain a Host Compatibility Mode variable for each
@@ -1309,16 +1309,18 @@
    describes the behavior of multicast address listener nodes on
    interfaces for which Host Compatibility Mode = MLDv2.  The algorithm
    for determining Host Compatibility Mode, and the behavior if its
-	   value is set to MLDv1, are described in <xref target="interop" />.</t>
+   value is set to MLDv1, are described in <xref target="interop" />.</t>
 
    <t>The link-scope all-nodes multicast address, (FF02::1), is handled as
    a special case.  On all nodes -- that is all hosts and routers,
    including multicast routers -- listening to packets destined to the
    all-nodes multicast address, from all sources, is permanently enabled
-   on all interfaces on which multicast listening is supported.  No MLD
-   messages are ever sent regarding neither the link-scope all-nodes
+   on all interfaces on which multicast listening is supported.
+   No MLD messages are ever sent regarding neither the link-scope all-nodes
    multicast address, nor any multicast address of scope 0 (reserved) or
-	   1 (node-local).</t>
+   1 (node-local). Multicast listeners MUST send MLD messages for all multicast
+   addresses except for the link-scope all-nodes multicast address and any multicast
+   addresses of scope less than 2.</t>
 
    <t>There are three types of events that trigger MLDv2 protocol actions
    on an interface:
@@ -2818,7 +2820,7 @@ Multicast Address and Source       All nodes on the link that had
    <t>The following is a summary of changes from MLDv1, specified in <xref target="RFC2710" />.
    <list style="bullets">
 
-	   <t>MLDv2 introduces source filtering.</t>
+   <t>MLDv2 introduces source filtering.</t>
 
    <t>The IP service interface of MLDv2 nodes is modified accordingly.
 	   It enables the specification of a filter mode and a source list.</t>
@@ -2880,6 +2882,11 @@ Multicast Address and Source       All nodes on the link that had
    </list></t>
    </section>
    <section title="MLDv2">
+   <list style="bullets">
+	   <t>Added definition of Resv to address Erratum 4773.</t>
+	   <t>Added clarifying text on which multicast addresses require the sending of MLD messages
+		   to address Erratum 5977.</t>
+   </list>
    </section>
    </section>
  </back>

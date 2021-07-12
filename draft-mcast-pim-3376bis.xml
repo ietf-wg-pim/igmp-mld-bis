@@ -23,7 +23,7 @@
    <author fullname="Bill Fenner" initials="B." surname="Fenner"></author>
    <author fullname="Ajit Thyagarajan" initials="A." surname="Thyagarajan"></author>
 
-   <date month="June" year="2021" />
+   <date month="July" year="2021" />
 
    <abstract>
    <t>This document specifies a revised Version 3 of the Internet Group Management
@@ -1998,16 +1998,17 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    host's initial report of membership in a group.  Default: 1 second.</t>
 
    </section>
-   <section title="Older Version Querier Present Timeout">
+   <section title="Older Version Querier Present Interval">
 
-   <t>The Older Version Querier Interval is the time-out for transitioning
+   <t>The Older Version Querier Present Interval is the timeout for transitioning
    a host back to IGMPv3 mode once an older version query is heard.
    When an older version query is received, hosts set their Older
-   Version Querier Present Timer to Older Version Querier Interval.</t>
+   Version Querier Present Timer to Older Version Querier Present Interval.</t>
 
-   <t>This value MUST be ((the Robustness Variable) times (the Query
-   Interval in the last Query received)) plus (one Query Response
-   Interval).</t>
+   <t>It is RECOMMENDED to use the default values for calculating the interval value
+   as hosts do not know the values configured on the querying routers.
+   This value SHOULD be [Robustness Variable] times [Query
+   Interval] plus (10 times the Max Resp Time in the last received query message).</t>
 
    </section>
    <section title="Older Host Present Interval">
@@ -2372,6 +2373,10 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    </section>
 
    <section title="Summary of Changes from RFC 3376">
+	   <list style="symbols">
+		   <t>Modified definition of Older Version Querier Present
+			   Interval to address Erratum 4375.</t>
+	   </list>
    </section>
  </back>
 </rfc>
