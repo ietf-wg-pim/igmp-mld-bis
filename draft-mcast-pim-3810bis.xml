@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-mcast-pim-3810bis-00" ipr="trust200902" obsoletes="3810">
+<rfc category="std" docName="draft-mcast-pim-3810bis-01" ipr="trust200902" obsoletes="3810">
  <front>
     <title abbrev="MLDv2 Revision">Multicast Listener Discovery Version 2 (MLDv2) for IPv6</title>
 
@@ -18,7 +18,7 @@
       </address>
    </author>
 
-   <date month="July" year="2021" />
+   <date month="August" year="2021" />
 
    <abstract>
    <t>This document updates RFC 2710, and it specifies Version 2 of the
@@ -297,7 +297,7 @@
    all the multicast routers on the link update the source timer.  If
    not, the source is deleted from the Include List.  The handling of
    the Include List, according to the received reports, is detailed in
-	   Tables 7.4.1 and 7.4.2.</t>
+   <xref target="curr_state_recs" /> and <xref target="fm_chg" />.</t>
 
    <t>A router is in EXCLUDE mode for a specific multicast address on a
    given interface if there is at least one listener in EXCLUDE mode for
@@ -336,7 +336,7 @@
       the fact that the Requested List is also used for fast blocking
       purposes, as described below.  If such a fast blocking is
       required, some sources may be deleted from the Requested List (as
-      shown in Tables 7.4.1 and 7.4.2) in order to reduce router state.
+	      shown in <xref target="curr_state_recs" /> and <xref target="fm_chg" />) in order to reduce router state.
       Nevertheless, in each such case the Filter Timer is updated as
       well.  Therefore, listeners in INCLUDE mode will have enough time,
       before an eventual switching, to reconfirm their interest in the
@@ -358,7 +358,7 @@
    </list></t>
 
    <t>The handling of the EXCLUDE mode router state, according to the
-	   received reports, is detailed in Tables 7.4.1 and 7.4.2.</t>
+	   received reports, is detailed in <xref target="curr_state_recs" /> and <xref target="fm_chg" />.</t>
 
    <t>Both the MLDv2 router and listener behaviors described in this
    document were defined to ensure backward interoperability with MLDv1
@@ -1815,8 +1815,8 @@
 	   be maintained for several reasons, as explained in <xref target="src_timers" />.</t>
 
    <t>The exact handling of both the INCLUDE and EXCLUDE mode router state,
-   according to the received reports, is presented in details in Tables
-	   7.4.1 and 7.4.2.</t>
+   according to the received reports, is presented in details in
+   <xref target="curr_state_recs" /> and <xref target="fm_chg" />.</t>
    </section>
 
    <section title="Definition of Filter Timers">
@@ -1894,7 +1894,7 @@
    timer expires, all the multicast routers on the link update their
    source timer.  If not, the source is deleted from the Include List.
    The handling of the Include List, according to the received reports,
-	   is detailed in Tables 7.4.1 and 7.4.2.</t>
+	   is detailed in <xref target="curr_state_recs" /> and <xref target="fm_chg" />.</t>
 
    <t>Source timers are treated differently when the Router Filter Mode for
    a multicast address is EXCLUDE.  For sources from the Requested List
@@ -1925,7 +1925,7 @@
       to the fact that the Requested List is also used for fast blocking
       purposes, as described below.  If such a fast blocking is
       required, some sources may be deleted from the Requested List (as
-      shown in Tables 7.4.1 and 7.4.2) in order to reduce router state.
+	   shown in <xref target="curr_state_recs" /> and <xref target="fm_chg" />) in order to reduce router state.
       Nevertheless, in each such case the Filter Timer is updated as
       well.  Therefore, listeners in INCLUDE mode will have enough time,
       before an eventual switching, to reconfirm their interest in the
@@ -1946,7 +1946,7 @@
    </list></t>
 
    <t>The handling of the EXCLUDE mode router state, according to the
-	   received reports, is detailed in Tables 7.4.1 and 7.4.2.</t>
+	   received reports, is detailed in <xref target="curr_state_recs" /> and <xref target="fm_chg" />.</t>
 
    <t>When the Router Filter Mode for a multicast address is EXCLUDE,
    source records are only deleted when the Filter Timer expires, or
@@ -1999,7 +1999,7 @@
    any of these checks fails, the packet is dropped.  If the validity of
 	   the MLD message is verified, the router starts to process the Report.</t>
 
-   <section title="Reception of Current State Records">
+   <section title="Reception of Current State Records" anchor="curr_state_recs">
 
    <t>When receiving Current State Records, a router updates both its
    Filter Timer and its source timers.  In some circumstances, the
