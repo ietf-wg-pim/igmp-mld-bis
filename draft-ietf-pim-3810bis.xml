@@ -2701,6 +2701,9 @@ Multicast Address and Source       All nodes on the link that had
    <t>Roland Vida, Luis Henrique Maciel Kosmalski Costa, Serge Fdida,
    Steve Deering, Bill Fenner, and Isidor Kouvelas are the authors of
    RFC 3810, which makes up the majority of the content in this document.</t>
+
+   <t>Anuj Budhiraja, Toerless Eckert, Olufemi Komolafe and Tim Winters have contributed
+   valuable content to this version of the specification.</t>
    </section>
 
    <section title="Acknowledgments">
@@ -2708,6 +2711,9 @@ Multicast Address and Source       All nodes on the link that had
    Ted Hardie, Russ Housley, Konstantin Kabassanov, Erik Nordmark,
    Shinsuke Suzuki, Margaret Wasserman, Bert Wijnen, and Remi Zara for
    their valuable comments and suggestions on this document.</t>
+
+   <t>Stig Venaas, Hitoshi Asaeda, and Mike McBride have provided valuable feedback on this
+   version of the specification and we thank them for their input.</t>
    </section>
 
  </middle>

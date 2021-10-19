@@ -2230,6 +2230,9 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    <section title="Contributors">
    <t>Brad Cain, Steve Deering, Isidor Kouvelas, Bill Fenner, and Ajit Thyagarajan
    are the authors of RFC 3376, which forms the bulk of the content contained herein.</t>
+
+   <t>Anuj Budhiraja, Toerless Eckert, Olufemi Komolafe and Tim Winters have contributed
+   valuable content to this version of the specification.</t>
    </section>
 
    <section title="Acknowledgments">
@@ -2237,6 +2240,9 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    Dino Farinacci, Serge Fdida, Wilbert de Graaf, Sumit Gupta, Mark
    Handley, Bob Quinn, Michael Speer, Dave Thaler and Rolland Vida for
    comments and suggestions on RFC 3376.</t>
+
+   <t>Stig Venaas, Hitoshi Asaeda, and Mike McBride have provided valuable feedback on this
+   version of the specification and we thank them for their input.</t>
    </section>
  </middle>
 
