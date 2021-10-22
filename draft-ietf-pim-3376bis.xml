@@ -1286,7 +1286,7 @@
    represents conflicts in the desired reception state; this set must be
    forwarded by some router on the network.  The second type is the set
    of sources which hosts have requested to not be forwarded.  <xref target="rationale" />
-   describes the reasons for keeping this second set when in EXCLUDE
+   describes the reasons for keeping two different sets when in EXCLUDE
 	   mode.</t>
 
    <t>When a router filter-mode for a group is INCLUDE, the source record
