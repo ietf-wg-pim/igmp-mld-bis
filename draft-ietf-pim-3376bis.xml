@@ -1612,13 +1612,13 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
 
    <t>IGMPv3 elects a single querier per subnet using the same querier
    election mechanism as IGMPv2, namely by IP address.  When a router
-   receives a query with a lower IP address, it sets the Other-Querier-
+   receives a general query with a lower IP address, it sets the Other-Querier-
    Present timer to Other Querier Present Interval and ceases to send
-   queries on the network if it was the previously elected querier.
+   general queries on the network if it was the previously elected querier.
    After its Other-Querier Present timer expires, it should begin
    sending General Queries.</t>
 
-   <t>If a router receives an older version query, it MUST use the oldest
+   <t>If a router receives an older version general query, it MUST use the oldest
    version of IGMP on the network.  For a detailed description of
 	   compatibility issues between IGMP versions see section <xref target="interop" />.</t>
    </section>
