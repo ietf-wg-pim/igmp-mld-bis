@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-ietf-pim-3376bis-00" ipr="trust200902" obsoletes="3376">
+<rfc category="std" docName="draft-ietf-pim-3376bis-01" ipr="trust200902" obsoletes="3376">
  <front>
    <title abbrev="IGMPv3 Revision">Internet Group Management Protocol, Version 3</title>
 
@@ -18,7 +18,7 @@
       </address>
    </author>
 
-   <date month="September" year="2021" />
+   <date month="October" year="2021" />
 
    <abstract>
    <t>This document specifies a revised Version 3 of the Internet Group Management

@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-ietf-pim-3810bis-00" ipr="trust200902" obsoletes="3810">
+<rfc category="std" docName="draft-ietf-pim-3810bis-01" ipr="trust200902" obsoletes="3810">
  <front>
     <title abbrev="MLDv2 Revision">Multicast Listener Discovery Version 2 (MLDv2) for IPv6</title>
 
@@ -18,7 +18,7 @@
       </address>
    </author>
 
-   <date month="September" year="2021" />
+   <date month="October" year="2021" />
 
    <abstract>
    <t>This document updates RFC 2710, and it specifies Version 2 of the
