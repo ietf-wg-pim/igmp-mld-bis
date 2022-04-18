@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc toc="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc compact="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<rfc category="bcp" docName="draft-haberman-pim-3228bis-00" ipr="trust200902" obsoletes="3228" updates="4443">
+ <front>
+   <title abbrev="IGMP IANA">IANA Considerations for Internet Group Management Protocols</title>
+
+   <author fullname="Brian Haberman" initials="B." surname="Haberman" role="editor">
+      <organization abbrev="JHU APL">Johns Hopkins University Applied Physics Lab</organization>
+      <address>
+        <email>brian@innovationslab.net</email>
+      </address>
+   </author>
+
+   <date month="April" year="2022" />
+
+   <abstract>
+   <t>This document specifies revised IANA Considerations for the Internet Group Management
+   Protocol and the Multicast Listener Discovery protocol. This document specifies the 
+   guidance provided to IANA to manage values associated with various fields within the
+   protocol headers of the group management protocols.</t>
+
+   <t>This document obsoletes RFC 3228 and updates RFC 4443.</t>
+   </abstract>
+ </front>
+
+ <middle>
+   <section anchor="intro" title="Introduction">
+
+   <t>The following sections describe the allocation guidelines associated with
+   the specified fields within the Internet Group Management Protocol (IGMP) <xref target="I-D.ietf-pim-3376bis"/>
+   and the Multicast Listener Discovery (MLD) <xref target="I-D.ietf-pim-3810bis"/> headers. Some of these registries
+   were created previously, while others are created by this document.</t>
+
+   <t>This document obsoletes <xref target="RFC3228"/> and updates <xref target="RFC4443"/>.</t>
+
+   <t>The capitalized key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+   "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in
+   <xref target="RFC2119" />.</t>
+   </section>
+
+   <section title="IANA Considerations">
+   <t>The registration procedures used in this document are defined in <xref target="RFC8126"/>.</t>
+
+   <section title="Type and Code Fields">
+   <section title="Internet Group Management Protocol">
+   <t> The IGMP header contains the following fields that carry values assigned from IANA-managed name
+	   spaces: Type and Code.  Code field values are defined relative to a specific Type value.</t>
+   <t><xref target="RFC3228"/> created an IANA registry for the IGMP Type field. This document updates that
+   registry in two ways:
+   <list style="hanging">
+	   <t>The registration procedure is changed to Standards Action.</t>
+	   <t>The reference for the registry is changed to this document.</t>
+   </list></t>
+
+   <t><xref target="RFC3228"/> created an IANA registry for Code values for existing IGMP Type fields.
+   The registration procedure for the existing registries is changed to Standards Action. The policy for
+   assigning Code values for new IGMP Types MUST be defined in the document defining the new Type value.</t>
+   </section>
+
+   <section title="Multicast Listener Discovery">
+	   <t>As with IGMP, the MLD header also contains Type and Code fields. Assignment of those fields within
+		   the MLD header is defined in <xref target="RFC4443"/>.</t>
+   </section>
+
+   </section>
+
+   <section title="Query Message Flags">
+
+   <t>The IANA is requested to create a single registry for the bits in the Flags
+   field of the Multicast Listener Query Message <xref target="I-D.ietf-pim-3810bis"/>
+   and the IGMPv3 Query Message <xref target="I-D.ietf-pim-3376bis"/>. The format for the registry is:</t>
+
+   <figure>
+      <artwork><![CDATA[
+   +----------+------------+-------------+-----------+
+   | Resv Bit | Short Name | Description | Reference |
+   +----------+------------+-------------+-----------+
+   | 0        |            |             |           |
+   | 1        |            |             |           |
+   | 2        |            |             |           |
+   | 3        |            |             |           |
+   +----------+------------+-------------+-----------+
+      ]]></artwork>
+   </figure>
+
+   <t>The assignment of new bit flags within the Flags field
+   requires Standards Action.</t>
+   </section>
+
+   <section title="Report Message Flags">
+   <t>The IANA is requested to create a single registry for the bits in the Flags
+   field of the Multicast Listener Report Message and the IGMPv3 Report Message. The format for the registry is:</t>
+
+   <figure>
+      <artwork><![CDATA[
+   +-----------+------------+-------------+-----------+
+   | Flags Bit | Short Name | Description | Reference |
+   +-----------+------------+-------------+-----------+
+   | 0         |            |             |           |
+   | 1         |            |             |           |
+   | 2         |            |             |           |
+   | 3         |            |             |           |
+   | 4         |            |             |           |
+   | 5         |            |             |           |
+   | 6         |            |             |           |
+   | 7         |            |             |           |
+   | 8         |            |             |           |
+   | 9         |            |             |           |
+   | 10        |            |             |           |
+   | 11        |            |             |           |
+   | 12        |            |             |           |
+   | 13        |            |             |           |
+   | 14        |            |             |           |
+   | 15        |            |             |           |
+   +-----------+------------+-------------+-----------+
+      ]]></artwork>
+   </figure>
+
+   <t>The assignment of new bit flags within the Flags field
+   require Standards Action.</t>
+   </section>
+
+   </section>
+
+   <section title="Security Considerations">
+	   <t>This document only defines IANA registy actions and there are no associated security issues.</t>
+   </section>
+
+   <section title="Contributors">
+   <t>Bill Fenner was the author of RFC 3228, which forms a portion of the content contained herein.</t>
+   </section>
+
+   <section title="Acknowledgments">
+   </section>
+ </middle>
+
+ <back>
+   <references title="Normative References">
+      <?rfc include="reference.RFC.2119" ?>
+      <?rfc include="reference.RFC.3228" ?>
+      <?rfc include="reference.RFC.8126" ?>
+   </references>
+
+   <references title="Informative References">
+      <?rfc include="reference.I-D.ietf-pim-3376bis" ?>
+      <?rfc include="reference.I-D.ietf-pim-3810bis" ?>
+      <?rfc include="reference.RFC.4443" ?>
+   </references>
+
+ </back>
+</rfc>
