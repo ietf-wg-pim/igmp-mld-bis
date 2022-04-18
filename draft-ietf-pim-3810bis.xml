@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-ietf-pim-3810bis-01" ipr="trust200902" obsoletes="3810">
+<rfc category="std" docName="draft-ietf-pim-3810bis-02" ipr="trust200902" obsoletes="3810">
  <front>
     <title abbrev="MLDv2 Revision">Multicast Listener Discovery Version 2 (MLDv2) for IPv6</title>
 
@@ -18,7 +18,7 @@
       </address>
    </author>
 
-   <date month="October" year="2021" />
+   <date month="April" year="2022" />
 
    <abstract>
    <t>This document updates RFC 2710, and it specifies Version 2 of the
@@ -693,7 +693,7 @@
 *                                                               *
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-| Resv  |S| QRV |     QQIC      |     Number of Sources (N)     |
+| Flags |S| QRV |     QQIC      |     Number of Sources (N)     |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                                                               |
 *                                                               *
@@ -772,7 +772,8 @@
 
    <section title="Reserved">
 
-	   <t>Initialized to zero by the sender; ignored by receivers.</t>
+   <t>Initialized to zero by the sender; ignored by receivers.</t>
+
    </section>
 
    <section title="Multicast Address">
@@ -783,9 +784,9 @@
 	   <xref target="num_srcs" />, below).</t>
    </section>
 
-   <section title="Resv">
+   <section title="Flags">
 
-	   <t>Initialized to zero by the sender; ignored by receivers.</t>
+   <t>Allocation of individual bits within the Flags field is described in <xref target="I-D.haberman-pim-3228bis" />.</t>
    </section>
 
 
@@ -935,7 +936,7 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |  Type = 143   |    Reserved   |           Checksum            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|           Reserved            |Nr of Mcast Address Records (M)|
+|             Flags             |Nr of Mcast Address Records (M)|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                                                               |
 .                                                               .
@@ -1014,10 +1015,9 @@
       ]]></artwork>
    </figure>
 
-   <section title="Reserved">
+   <section title="Reserved">						
 
-   <t>The Reserved fields are set to zero on transmission, and ignored on
-	   reception.</t>
+   <t>The Reserved field are set to zero on transmission, and ignored on reception.</t>
    </section>
 
    <section title="Checksum">
@@ -1027,6 +1027,12 @@
    order to compute the checksum, the Checksum field is set to zero.
    When a packet is received, the checksum MUST be verified before
 	   processing it.</t>
+   </section>
+
+   <section title="Flags">						
+
+
+   <t>Allocation of individual bits within the Flags field is described in <xref target="I-D.haberman-pim-3228bis" />.</t>
    </section>
 
    <section title="Nr of Mcast Address Records (M)">
@@ -1250,7 +1256,7 @@
    1 Report whose IP Destination Address field contains any of the
    IPv6 addresses (unicast or multicast) assigned to the interface on
    which the Report arrives.  This might be useful, e.g., for debugging
-	   purposes.</t>
+   purposes.</t>
    </section>
 
    <section title="Multicast Listener Report Size">
@@ -2450,7 +2456,7 @@ Q(MA)       Filter Timer is lowered to LLQT
    that must pass before a multicast router decides there are no more
    listeners of a multicast address or a particular source on a link.
    This value MUST be ([Robustness Variable] times [Query Interval])
-	   plus [Query Response Interval].</t>
+	   plus 2 times [Query Response Interval].</t>
    </section>
 
    <section title="Other Querier Present Timeout">
@@ -2695,6 +2701,7 @@ Multicast Address and Source       All nodes on the link that had
    <t>In addition, IANA has assigned the ICMPv6 message type value of 143
    for Version 2 Multicast Listener Report messages, as specified in
    <xref target="node_state" />.</t>
+
    </section>
 
    <section title="Contributors">
@@ -2721,6 +2728,7 @@ Multicast Address and Source       All nodes on the link that had
  <back>
    <references title="Normative References">
       <?rfc include="reference.RFC.2119" ?>
+      <?rfc include="reference.RFC.2434" ?>
       <?rfc include="reference.RFC.2460" ?>
       <?rfc include="reference.RFC.2463" ?>
       <?rfc include="reference.RFC.2464" ?>
@@ -2736,6 +2744,7 @@ Multicast Address and Source       All nodes on the link that had
       <?rfc include="reference.RFC.3569" ?>
       <?rfc include="reference.RFC.3678" ?>
       <?rfc include="reference.RFC.3810" ?>
+      <?rfc include="reference.I-D.haberman-pim-3228bis" ?>
    </references>
 
    <section title="Design Rationale">

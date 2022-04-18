@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-ietf-pim-3376bis-01" ipr="trust200902" obsoletes="3376">
+<rfc category="std" docName="draft-ietf-pim-3376bis-02" ipr="trust200902" obsoletes="3376">
  <front>
    <title abbrev="IGMPv3 Revision">Internet Group Management Protocol, Version 3</title>
 
@@ -18,7 +18,7 @@
       </address>
    </author>
 
-   <date month="October" year="2021" />
+   <date month="April" year="2022" />
 
    <abstract>
    <t>This document specifies a revised Version 3 of the Internet Group Management
@@ -388,7 +388,7 @@
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                         Group Address                         |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    | Resv  |S| QRV |     QQIC      |     Number of Sources (N)     |
+    | Flags |S| QRV |     QQIC      |     Number of Sources (N)     |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                       Source Address [1]                      |
     +-                                                             -+
@@ -449,10 +449,10 @@
    <xref target="src_addr_field" />, below).</t>
    </section>
 
-   <section title="Resv (Reserved)">
+   <section title="Flags">
 
-   <t>The Resv field is set to zero on transmission, and ignored on
-	   reception.</t>
+   <t>The Flags field is a bitstring managed by an IANA registry defined in
+   <xref target="I-D.haberman-pim-3228bis"/>.</t>
    </section>
 
    <section title="S Flag (Suppress Router-Side Processing)">
@@ -591,7 +591,7 @@
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |  Type = 0x22  |    Reserved   |           Checksum            |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |           Reserved            |  Number of Group Records (M)  |
+    |             Flags             |  Number of Group Records (M)  |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |                                                               |
     .                                                               .
@@ -648,7 +648,7 @@
 
    <section title="Reserved">
 
-   <t>The Reserved fields are set to zero on transmission, and ignored on
+   <t>The Reserved field is set to zero on transmission, and ignored on
    reception.</t>
 
    </section>
@@ -658,6 +658,11 @@
    sum of the whole IGMP message (the entire IP payload).  For computing
    the checksum, the Checksum field is set to zero.  When receiving
 	   packets, the checksum MUST be verified before processing a message.</t>
+   </section>
+
+   <section title="Flags">
+   <t>The Flags field is a bitstring managed by an IANA registry defined in
+   <xref target="I-D.haberman-pim-3228bis"/>.</t>
    </section>
 
    <section title="Number of Group Records (M)">
@@ -1927,7 +1932,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    group or a particular source on a network.</t>
 
    <t>This value MUST be ((the Robustness Variable) times (the Query
-   Interval)) plus (one Query Response Interval).</t>
+   Interval)) plus (2 * Query Response Interval).</t>
 
    </section>
    <section title="Other Querier Present Interval">
@@ -2224,7 +2229,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
 
    <section title="IANA Considerations">
    <t>All IGMP types described in this document are already assigned in
-   <xref target="RFC3228" />.</t>
+   <xref target="RFC3228" />. The Flags fields are managed via <xref target="I-D.haberman-pim-3228bis"/>.</t>
    </section>
 
    <section title="Contributors">
@@ -2261,6 +2266,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
       <?rfc include="reference.RFC.3376" ?>
       <?rfc include="reference.RFC.3569" ?>
       <?rfc include="reference.RFC.3678" ?>
+      <?rfc include="reference.I-D.haberman-pim-3228bis" ?>
    </references>
 
    <section anchor="rationale" title="Design Rationale">
