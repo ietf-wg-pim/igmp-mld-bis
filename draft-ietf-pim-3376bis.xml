@@ -18,8 +18,6 @@
       </address>
    </author>
 
-   <date month="July" year="2022" />
-
    <abstract>
    <t>This document specifies a revised Version 3 of the Internet Group Management
    Protocol, IGMPv3.  IGMP is the protocol used by IPv4 systems to
