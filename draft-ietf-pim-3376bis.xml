@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-ietf-pim-3376bis-02" ipr="trust200902" obsoletes="3376">
+<rfc category="std" docName="draft-ietf-pim-3376bis-03" ipr="trust200902" updates="2236" obsoletes="3376">
  <front>
    <title abbrev="IGMPv3 Revision">Internet Group Management Protocol, Version 3</title>
 
@@ -18,7 +18,7 @@
       </address>
    </author>
 
-   <date month="April" year="2022" />
+   <date month="July" year="2022" />
 
    <abstract>
    <t>This document specifies a revised Version 3 of the Internet Group Management
@@ -2387,7 +2387,11 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    <t>The following is a list of changes made since RFC 3376.
    <list style="symbols">
 	   <t>Modified definition of Older Version Querier Present
-	   Interval to address Erratum 4375.</t>
+		   Interval to address Erratum 4375.</t>
+	   <t>Modified metadata to fix Obsoletes vs Updates relationship with RFC 2236 per Erratum 1501.</t>
+	   <t>Updated Group Membership Interval definition to address Erratum 6725.</t>
+	   <t>Updated text for Router Filter-Mode to address Erratum 5562.</t>
+	   <t>Clarified the use of General Queries in the Querier election process.</t>
    </list></t>
    </section>
  </back>

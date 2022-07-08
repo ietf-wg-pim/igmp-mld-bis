@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-ietf-pim-3810bis-02" ipr="trust200902" obsoletes="3810">
+<rfc category="std" docName="draft-ietf-pim-3810bis-03" ipr="trust200902" obsoletes="3810">
  <front>
     <title abbrev="MLDv2 Revision">Multicast Listener Discovery Version 2 (MLDv2) for IPv6</title>
 
@@ -18,7 +18,7 @@
       </address>
    </author>
 
-   <date month="April" year="2022" />
+   <date month="July" year="2022" />
 
    <abstract>
    <t>This document updates RFC 2710, and it specifies Version 2 of the
@@ -2456,7 +2456,7 @@ Q(MA)       Filter Timer is lowered to LLQT
    that must pass before a multicast router decides there are no more
    listeners of a multicast address or a particular source on a link.
    This value MUST be ([Robustness Variable] times [Query Interval])
-	   plus 2 times [Query Response Interval].</t>
+   plus 2 times [Query Response Interval].</t>
    </section>
 
    <section title="Other Querier Present Timeout">
@@ -2902,6 +2902,7 @@ Multicast Address and Source       All nodes on the link that had
 	   <t>Added definition of Resv to address Erratum 4773.</t>
 	   <t>Added clarifying text on which multicast addresses require the sending of MLD messages
 	   to address Erratum 5977.</t>
+           <t>Added text to clarify the Group Membership Interval timer changes from Erratum 6725.</t>
    </list></t>
    </section>
    </section>
