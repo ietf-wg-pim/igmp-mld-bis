@@ -7,7 +7,7 @@
 <?rfc compact="yes"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<rfc category="std" docName="draft-ietf-pim-3376bis-03" ipr="trust200902" updates="2236" obsoletes="3376">
+<rfc category="std" docName="draft-ietf-pim-3376bis-11" ipr="pre5378trust200902" updates="2236" obsoletes="3376">
  <front>
    <title abbrev="IGMPv3 Revision">Internet Group Management Protocol, Version 3</title>
 
@@ -19,8 +19,7 @@
    </author>
 
    <abstract>
-   <t>This document specifies a revised Version 3 of the Internet Group Management
-   Protocol, IGMPv3.  IGMP is the protocol used by IPv4 systems to
+   <t>IGMP is the protocol used by IPv4 systems to
    report their IP multicast group memberships to neighboring multicast
    routers.  Version 3 of IGMP adds support for source filtering, that
    is, the ability for a system to report interest in receiving packets
@@ -30,7 +29,12 @@
    delivering multicast packets from specific sources to networks where
    there are no interested receivers.</t>
 
-   <t>This document obsoletes RFC 3376.</t>
+   <t>This document specifies Version 3 of the Internet Group Management
+   Protocol, IGMPv3.  It is a revised version of the specification to include
+   clarifications and fixes for errata in RFC 3376 and is backwards compatible
+   with RFC 3376.</t>
+
+   <t>This document updates RFC 2236 and obsoletes RFC 3376.</t>
    </abstract>
  </front>
 
@@ -64,11 +68,22 @@
    addresses, sent to a particular multicast address.  Version 3 is
    designed to be interoperable with Versions 1 and 2.</t>
 
-   <t>This document obsoletes <xref target="RFC3376" />.</t>
+   <t>This document uses SSM-aware to refer to systems
+	   that support Source-Specific Multicast (SSM) as defined in <xref target="RFC4607" />.</t>
 
-   <t>The capitalized key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
-   "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in
-   <xref target="RFC2119" />.</t>
+   <t>This document updates <xref target="RFC2236"/> as a proper implementation of Version 3 of IGMP
+   needs to implement Version 2 Report and Leave message handling.</t>
+
+   <t>This document obsoletes <xref target="RFC3376"/> as it provides clarifications and fixes
+   for errata in RFC 3376. Detailed updates for those changes are described in <xref target="errata-details"/>.</t>
+
+   <section title="Conventions Used in This Document">
+   <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all
+   capitals, as shown here.</t>
+   </section>
    </section>
 
    <section title="The Service Interface for Requesting IP Multicast Reception">
@@ -338,7 +353,7 @@
    with an IP Time-to-Live of 1, IP Precedence of Internetwork Control
    (e.g., Type of Service 0xc0), and carries an IP Router Alert option
    <xref target="RFC2113" /> in its IP header.  IGMP message types are
-   registered per <xref target="RFC3228" />.</t>
+   registered per <xref target="I-D.ietf-pim-3228bis"/>.</t>
 
    <t>There are two IGMP message types of concern to the IGMPv3 protocol
 	   described in this document:</t>
@@ -450,7 +465,7 @@
    <section title="Flags">
 
    <t>The Flags field is a bitstring managed by an IANA registry defined in
-   <xref target="I-D.haberman-pim-3228bis"/>.</t>
+   <xref target="I-D.ietf-pim-3228bis"/>.</t>
    </section>
 
    <section title="S Flag (Suppress Router-Side Processing)">
@@ -660,7 +675,7 @@
 
    <section title="Flags">
    <t>The Flags field is a bitstring managed by an IANA registry defined in
-   <xref target="I-D.haberman-pim-3228bis"/>.</t>
+   <xref target="I-D.ietf-pim-3228bis"/>.</t>
    </section>
 
    <section title="Number of Group Records (M)">
@@ -743,15 +758,18 @@
      two values:
      <list style="format %d - " counter="my_cnt">
 	   <t>MODE_IS_INCLUDE - indicates that the interface has a
-               filter mode of INCLUDE for the specified multicast
-               address.  The Source Address [i] fields in this Group
-               Record contain the interface's source list for the
-	       specified multicast address, if it is non-empty.</t>
+           filter mode of INCLUDE for the specified multicast
+           address.  The Source Address [i] fields in this Group
+           Record contain the interface's source list for the
+	   specified multicast address, if it is non-empty.</t>
 	   <t>MODE_IS_EXCLUDE - indicates that the interface has a
-               filter mode of EXCLUDE for the specified multicast
-               address.  The Source Address [i] fields in this Group
-               Record contain the interface's source list for the
-		   specified multicast address, if it is non-empty.</t>
+           filter mode of EXCLUDE for the specified multicast
+           address. The Source Address [i] fields in this Group
+           Record contain the interface's source list for the
+	   specified multicast address, if it is non-empty. An
+	   SSM-aware host SHOULD NOT send a MODE_IS_EXCLUDE record type
+	   for multicast addresses that fall within the SSM address range as
+	   they will be ignored by SSM-aware routers <xref target="RFC4604"/>.</t>
    </list></t>
 
    <t>A Filter-Mode-Change Record is sent by a system whenever a local
@@ -763,17 +781,19 @@
      Filter-Mode-Change Record may be one of the following two values:
      <list style="format %d - " counter="my_cnt">
 	   <t>CHANGE_TO_INCLUDE_MODE - indicates that the interface
-               has changed to INCLUDE filter mode for the specified
-               multicast address.  The Source Address [i] fields
-               in this Group Record contain the interface's new
-               source list for the specified multicast address,
-		   if it is non-empty.</t>
+           has changed to INCLUDE filter mode for the specified
+           multicast address.  The Source Address [i] fields
+           in this Group Record contain the interface's new
+           source list for the specified multicast address,
+	   if it is non-empty.</t>
 	   <t>CHANGE_TO_EXCLUDE_MODE - indicates that the interface
-               has changed to EXCLUDE filter mode for the specified
-               multicast address. The Source Address [i] fields
-               in this Group Record contain the interface's new
-               source list for the specified multicast address,
-		   if it is non-empty.</t>
+           has changed to EXCLUDE filter mode for the specified
+           multicast address. The Source Address [i] fields
+           in this Group Record contain the interface's new
+           source list for the specified multicast address,
+	   if it is non-empty. An SSM-aware host SHOULD NOT send a
+	   CHANGE_TO_EXCLUDE_MODE record type for multicast addresses
+	   that fall within the SSM address range.</t>
    </list></t>
 
    <t>A Source-List-Change Record is sent by a system whenever a local
@@ -1145,8 +1165,8 @@
 	   in the following table:</t></list></t>
 
    <texttable>
-	   <ttcol align="center">interface state</ttcol>
-	   <ttcol align="center">set of sources in the pending response record</ttcol>
+	   <ttcol align="center">Per-Interface State</ttcol>
+	   <ttcol align="center">Set of Sources in the Pending Response Record</ttcol>
 	   <ttcol align="center">Current-State Record</ttcol>
 	   <c>INCLUDE (A)</c><c>B</c><c>IS_IN (A*B)</c>
 	   <c>EXCLUDE (A)</c><c>B</c><c>IS_IN (B-A)</c>
@@ -1414,6 +1434,14 @@
    </section>
 
    <section title="Action on Reception of Reports" anchor="rcv_rpts">
+
+   <t>SSM-aware routers SHOULD ignore records that contain multicast addresses
+   in the SSM address range if the record type is MODE_IS_EXCLUDE or
+   CHANGE_TO_EXCLUDE_MODE. SSM-aware routers SHOULD ignore IGMPv1/IGMPv2
+   Report and IGMPv2 DONE messages that contain multicast addresses in the SSM address range, SHOULD NOT
+   use such Reports to establish IP forwarding state, and MAY log an error if it receives
+   such a message.</t>
+
    <section title="Reception of Current-State Records">
 
    <t>When receiving Current-State Records, a router updates both its group
@@ -1759,6 +1787,12 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
 
    <t>Whenever a host changes its compatibility mode, it cancels all its
    pending response and retransmission timers.</t>
+
+   <t>An SSM-aware host that receives an IGMPv1 Query, an IGMPv2 General Query,
+   or an IGMPv2 Group Specific Query for a multicast address in the SSM address range
+   SHOULD log an error. It is RECOMMENDED that implementions provide a configuration option
+   to disable use of Host Compatibility Mode to allow networks to operate only in SSM mode.
+   This configuration option SHOULD be disabled by default.</t>
    </section>
 
    <section title="In the Presence of Older Version Group Members">
@@ -1766,7 +1800,8 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    <t>An IGMPv3 host may be placed on a network where there are hosts that
    have not yet been upgraded to IGMPv3.  A host MAY allow its IGMPv3
    Membership Record to be suppressed by either a Version 1 Membership
-   Report, or a Version 2 Membership Report.</t>
+   Report, or a Version 2 Membership Report. SSM-aware hosts MUST NOT allow
+   its IGMPv3 Membership Record to be suppressed.</t>
    </section>
    </section>
 
@@ -1797,6 +1832,9 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    <t>If a router is not explicitly configured to use IGMPv1 or IGMPv2
      and hears an IGMPv1 Query or IGMPv2 General Query, it SHOULD log a
    warning.  These warnings MUST be rate-limited.</t>
+   <t>It is RECOMMENDED that implementions provide a configuration option
+   to disable use of compatibility mode to allow networks to operate only
+   in SSM mode. This configuration option SHOULD be disabled by default.</t>
    </list></t>
    </section>
 
@@ -2193,10 +2231,10 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    </list></t>
    </section>
 
-   <section title="9.4. IPSEC Usage">
+   <section title="IPSEC Usage">
 
    <t>In addition to these measures, IPSEC in Authentication Header mode
-   <xref target="RFC2402" /> may be used to protect against remote attacks by ensuring that
+   <xref target="RFC4302" /> may be used to protect against remote attacks by ensuring that
    IGMPv3 messages came from a system on the LAN (or, more specifically,
    a system with the proper key).  When using IPSEC, the messages sent
    to 224.0.0.1 and 224.0.0.22 should be authenticated using AH.  When
@@ -2226,8 +2264,7 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    </section>
 
    <section title="IANA Considerations">
-   <t>All IGMP types described in this document are already assigned in
-   <xref target="RFC3228" />. The Flags fields are managed via <xref target="I-D.haberman-pim-3228bis"/>.</t>
+   <t>All IGMP types described in this document are managed via <xref target="I-D.ietf-pim-3228bis"/>.</t>
    </section>
 
    <section title="Contributors">
@@ -2255,8 +2292,11 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
       <?rfc include="reference.RFC.2113" ?>
       <?rfc include="reference.RFC.2119" ?>
       <?rfc include="reference.RFC.2236" ?>
-      <?rfc include="reference.RFC.2402" ?>
-      <?rfc include="reference.RFC.3228" ?>
+      <?rfc include="reference.RFC.4302" ?>
+      <?rfc include="reference.RFC.4607" ?>
+      <?rfc include="reference.RFC.4604" ?>
+      <?rfc include="reference.RFC.8174" ?>
+      <?rfc include="reference.I-D.ietf-pim-3228bis" ?>
    </references>
 
    <references title="Informative References">
@@ -2264,7 +2304,6 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
       <?rfc include="reference.RFC.3376" ?>
       <?rfc include="reference.RFC.3569" ?>
       <?rfc include="reference.RFC.3678" ?>
-      <?rfc include="reference.I-D.haberman-pim-3228bis" ?>
    </references>
 
    <section anchor="rationale" title="Design Rationale">
@@ -2381,12 +2420,13 @@ EXCLUDE (X,Y)  TO_IN (A)    EXCLUDE (X+A,Y-A)     (A)=GMI
    </list></t>
    </section>
 
-   <section title="Summary of Changes from RFC 3376">
+   <section anchor="errata-details" title="Summary of Changes from RFC 3376">
    <t>The following is a list of changes made since RFC 3376.
    <list style="symbols">
 	   <t>Modified definition of Older Version Querier Present
 		   Interval to address Erratum 4375.</t>
 	   <t>Modified metadata to fix Obsoletes vs Updates relationship with RFC 2236 per Erratum 1501.</t>
+	   <t>Updated introductory text to describe Updates relationship with RFC 2236 per Erratum 7339.</t>
 	   <t>Updated Group Membership Interval definition to address Erratum 6725.</t>
 	   <t>Updated text for Router Filter-Mode to address Erratum 5562.</t>
 	   <t>Clarified the use of General Queries in the Querier election process.</t>
